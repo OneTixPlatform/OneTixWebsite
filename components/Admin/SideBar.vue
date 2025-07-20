@@ -1,6 +1,6 @@
 <template>
     <div>
-sidebar
+sidebarrrrrr
     </div>
 </template>
 
