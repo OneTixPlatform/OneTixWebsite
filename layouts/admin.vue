@@ -1,8 +1,6 @@
 <template>
   <div>
-    <CommonNav />
-    <Slot />
-    <CommonFooter />
+   admin layout
   </div>
 </template>
 
