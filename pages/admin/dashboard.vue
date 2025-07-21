@@ -1,13 +1,11 @@
 <template>
-    <div>
-dashboard for admin
-    </div>
+  <div>dashboard for admin</div>
 </template>
 
 <script setup lang="ts">
-
+definePageMeta({
+    layout:'admin'
+})
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
