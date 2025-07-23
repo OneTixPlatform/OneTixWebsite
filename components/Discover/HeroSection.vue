@@ -3,35 +3,45 @@
     class="bg-secondary-1 h-[704px] flex flex-col mt-[64px] items-center dark:bg-purple-brown"
   >
     <div class="flex flex-col px-2 text-center gap-[16px] sm:gap-[32px]">
-      <div class="text-center">
-        <div class="flex sm:gap-4 flex-col sm:flex-row items-center z-0">
-          <h1
-            class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] sm:leading-[56px] md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4]"
-          >
-            Find
-          </h1>
-          <div class="w-full max-w-[618px] relative">
-            <!-- Pink background with cut edges -->
-            <IconsIncredibleTop class="w-full max-w-[607px]" />
+      <div class="text-center px-4 sm:px-6 md:px-8">
+  <!-- <div class="flex flex-col w-full  bg-red-400 sm:flex-row items-center justify-center sm:gap-4 relative z-0">
+  <h1
+    class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] sm:leading-[56px] md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4]"
+  >
+    Find
+  </h1>
 
-            <!-- Outline / Shadow underline -->
-            <IconsIncredibleBottom
-              class="absolute top-2 right-0 -left-1.5 w-full max-w-[618px]"
-            />
-            <h1
-              class="sm:text-[48px] md:text-[48px] text-[29px] xs:text-[36px] sm:leading-[56px] absolute md:top-[2.0px] lg:left-[35px] text-center w-full lg:text-left lg:text-[60px] top-4 md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4]"
-            >
-              incredible events
-            </h1>
-          </div>
-        </div>
+  <img v-if="!isDark" :src="incredibleLight" class="w-full max-w-[611px] h-full max-h-[99px]" alt=""/>
+    <img v-else :src="incredibleDark" class="w-full max-w-[611px]  h-full max-h-[99px]" alt=""/>
+</div> -->
+<div class="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center sm:gap-4 relative z-0 w-full">
+  <!-- "Find" -->
+  <h1
+    class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] sm:leading-[56px] md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4] mb-3 sm:mb-0"
+  >
+    Find
+  </h1>
 
-        <h1
-          class="text-[29px] xs:text-[36px] lg:text-[60px] mt-0 sm:mt-2 md:text-[48px] sm:leading-[56px] md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4]"
-        >
-          and get inspired!
-        </h1>
-      </div>
+  <!-- Responsive image based on theme -->
+   <ClientOnly>
+<img
+    :src="isDark ? incredibleDark : incredibleLight"
+    alt="Incredible Events"
+    class="max-w-full  sm:w-[420px] md:w-[500px] lg:w-[611px] h-auto"
+  />
+   </ClientOnly>
+  
+</div>
+
+
+  <!-- "and get inspired!" -->
+  <h1
+    class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4] mt-4 sm:mt-2 sm:leading-[56px] md:leading-[72px]"
+  >
+    and get inspired!
+  </h1>
+</div>
+
 
       <p
         class="font-regular text-center text-gray-background-7 dark:text-[#EFF2F4]"
@@ -58,6 +68,12 @@ import IconsRun from "@/components/icons/Run.vue";
 import IconsCareer from "@/components/icons/Career.vue";
 import IconsChurch from "@/components/icons/Church.vue";
 import IconsFoodandDrink from "@/components/icons/FoodandDrink.vue";
+import incredibleLight from "@/assets/images/img/incredibleLight.png";
+import incredibleDark from "@/assets/images/img/incredibleDark.png";
+
+
+const colorMode = useColorMode();
+const isDark = computed(() => colorMode.value === "dark");
 
 const eventTypes = [
   {
