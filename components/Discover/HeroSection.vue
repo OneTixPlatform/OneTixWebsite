@@ -4,7 +4,7 @@
   >
     <div class="flex flex-col px-2 text-center gap-[16px] sm:gap-[32px]">
       <div class="text-center px-4 sm:px-6 md:px-8">
-  <!-- <div class="flex flex-col w-full  bg-red-400 sm:flex-row items-center justify-center sm:gap-4 relative z-0">
+        <!-- <div class="flex flex-col w-full  bg-red-400 sm:flex-row items-center justify-center sm:gap-4 relative z-0">
   <h1
     class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] sm:leading-[56px] md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4]"
   >
@@ -14,34 +14,33 @@
   <img v-if="!isDark" :src="incredibleLight" class="w-full max-w-[611px] h-full max-h-[99px]" alt=""/>
     <img v-else :src="incredibleDark" class="w-full max-w-[611px]  h-full max-h-[99px]" alt=""/>
 </div> -->
-<div class="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center sm:gap-4 relative z-0 w-full">
-  <!-- "Find" -->
-  <h1
-    class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] sm:leading-[56px] md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4] mb-3 sm:mb-0"
-  >
-    Find
-  </h1>
+        <div
+          class="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center sm:gap-4 relative z-0 w-full"
+        >
+          <!-- "Find" -->
+          <h1
+            class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] sm:leading-[56px] md:leading-[72px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4] mb-3 sm:mb-0"
+          >
+            Find
+          </h1>
 
-  <!-- Responsive image based on theme -->
-   <ClientOnly>
-<img
-    :src="isDark ? incredibleDark : incredibleLight"
-    alt="Incredible Events"
-    class="max-w-full  sm:w-[420px] md:w-[500px] lg:w-[611px] h-auto"
-  />
-   </ClientOnly>
-  
-</div>
+          <!-- Responsive image based on theme -->
+          <ClientOnly>
+            <img
+              :src="isDark ? incredibleDark : incredibleLight"
+              alt="Incredible Events"
+              class="max-w-full sm:w-[420px] md:w-[500px] lg:w-[611px] h-auto"
+            />
+          </ClientOnly>
+        </div>
 
-
-  <!-- "and get inspired!" -->
-  <h1
-    class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4] mt-4 sm:mt-2 sm:leading-[56px] md:leading-[72px]"
-  >
-    and get inspired!
-  </h1>
-</div>
-
+        <!-- "and get inspired!" -->
+        <h1
+          class="text-[29px] xs:text-[36px] md:text-[48px] lg:text-[60px] font-extrabold text-gray-background-9 dark:text-[#EFF2F4] mt-4 sm:mt-2 sm:leading-[56px] md:leading-[72px]"
+        >
+          and get inspired!
+        </h1>
+      </div>
 
       <p
         class="font-regular text-center text-gray-background-7 dark:text-[#EFF2F4]"
@@ -70,7 +69,6 @@ import IconsChurch from "@/components/icons/Church.vue";
 import IconsFoodandDrink from "@/components/icons/FoodandDrink.vue";
 import incredibleLight from "@/assets/images/img/incredibleLight.png";
 import incredibleDark from "@/assets/images/img/incredibleDark.png";
-
 
 const colorMode = useColorMode();
 const isDark = computed(() => colorMode.value === "dark");
