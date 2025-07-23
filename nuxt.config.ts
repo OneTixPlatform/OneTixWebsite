@@ -5,7 +5,12 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-  modules: ["maz-ui/nuxt"],
+  modules: ["maz-ui/nuxt", "@nuxtjs/color-mode"],
+  colorMode: {
+    classSuffix: "",
+    preference: "light", // or 'dark'
+    fallback: "light",
+  },
 
   vite: {
     plugins: [tailwindcss()],

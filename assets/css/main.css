@@ -27,8 +27,42 @@
   --color-gray-background-8: #334155;
   --color-black-highest: #1b1c20;
   --color-purple-brown: #2b1f26;
+  --color-gray-background-9: #1e293b;
+  --color-gray-background-7: #475569;
+  --breakpoint-xs: 400px;
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 24px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    width: 2px;
+    background-color: #d6d6d6;
+    border-radius: 24px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 body {
   font-family: "Lexend", sans-serif;
 }
+
+/* overflow tests */
+/* * {
+  outline: 1px solid red !important;
+} */

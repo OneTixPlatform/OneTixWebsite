@@ -1,14 +1,16 @@
 <template>
   <header
-    class="sticky top-0 right-0 bg-transparent cursor-pointer py-[16px] px-[20px] xl:py-[20px] flex justify-between items-center xl:bg-secondary-1 xl:dark:bg-black-highest xl:px-[84px]"
+    class="sticky top-0 z-50 right-0 cursor-pointer py-[16px] px-[20px] xl:py-[20px] flex justify-between items-center xl:bg-secondary-1 xl:dark:bg-black-highest xl:px-[84px]"
   >
     <!-- logo -->
     <div class="w-[140px] h-[48px]">
-      <img
-        :src="isDark ? oneTixWhite : oneTix"
-        alt="one-tix"
-        class="w-full h-full object-contain object-center"
-      />
+      <ClientOnly>
+        <img
+          :src="isDark ? oneTixWhite : oneTix"
+          alt="one-tix"
+          class="w-full h-full object-contain object-center"
+        />
+      </ClientOnly>
     </div>
 
     <!-- routes -->
@@ -49,9 +51,11 @@
         v-if="isDark"
         class="flex xl:hidden cursor-pointer"
       />
-      <div @click="toggleDark" class="px-[12px] py-[7px]">
-        <IconsMoon v-if="!isDark" />
-        <IconsSunshine v-else />
+      <div class="px-[12px] py-[7px]">
+        <ClientOnly>
+          <IconsMoon v-if="!isDark" @click="toggleDark" />
+          <IconsSunshine v-else @click="toggleDark" />
+        </ClientOnly>
       </div>
     </div>
   </header>
@@ -64,14 +68,6 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 
-const isDark = ref(false);
-
-onMounted(() => {
-  isDark.value =
-    localStorage.theme === "dark" ||
-    document.documentElement.classList.contains("dark");
-});
-
 const links = [
   { name: "Discover events", path: "/" },
   { name: "How Onetix works", path: "/How" },
@@ -79,12 +75,10 @@ const links = [
   { name: "About us", path: "/contact" },
 ];
 
-// function for toggling dark mode
+const colorMode = useColorMode();
+const isDark = computed(() => colorMode.value === "dark");
+
 function toggleDark() {
-  const html = document.documentElement;
-  html.classList.toggle("dark");
-  const isNowDark = html.classList.contains("dark");
-  localStorage.theme = html.classList.contains("dark") ? "dark" : "light";
-  isDark.value = isNowDark;
+  colorMode.preference = isDark.value ? "light" : "dark";
 }
 </script>

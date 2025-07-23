@@ -3,7 +3,7 @@
     style="
       clip-path: polygon(20% 1%, 79% 11%, 100% 11%, 100% 100%, 0 100%, 0 10%);
     "
-    class="bg-black-highest px-8 py-4 -mt-[80px] w-full flex flex-col items-center"
+    class="bg-black-highest sm:px-8 px-4 py-4 -mt-[80px] w-full flex flex-col items-center"
   >
     <div
       class="w-full mt-[121px] flex flex-col gap-[16px] items-center justify-center"
@@ -14,8 +14,8 @@
       <p
         class="lg:text-[16px] text-[14px] text-white w-full max-w-[745px] text-center"
       >
-        Whether it’s music, sports or your favourite underground party -- Onetix
-        is where your best memories begin. Find your moment. Be there.
+        Whether it’s music, sports or your favourite underground party Onetix is
+        where your best memories begin. Find your moment. Be there.
       </p>
     </div>
     <div class="flex gap-[29px] text-white mt-8 items-center justify-center">
@@ -35,7 +35,7 @@
       class="flex flex-wrap justify-between items-center w-full mt-8 max-w-[1275px]"
     >
       <!-- logo -->
-      <div class="w-[140px] h-[48px]">
+      <div class="sm:w-[140px] sm:h-[48px] h-[40px] w-[120px]">
         <img
           :src="oneTixWhite"
           alt="one-tix"

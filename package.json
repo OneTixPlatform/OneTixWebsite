@@ -11,6 +11,7 @@
     "format": " prettier . --write"
   },
   "dependencies": {
+    "@nuxtjs/color-mode": "^3.5.2",
     "@tailwindcss/vite": "^4.1.11",
     "maz-ui": "^3.50.1",
     "nuxt": "^3.17.7",
