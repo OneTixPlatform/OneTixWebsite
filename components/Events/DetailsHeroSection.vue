@@ -1,6 +1,12 @@
 <template>
   <div
-    class="flex flex-col items-center px-4 bg-secondary-1 dark:bg-purple-brown w-full pt-[32px] pb-[94px]"
+   :style="{
+      backgroundImage: `url(${detailsHero})`,
+    
+     
+    
+    }"
+    class="flex flex-col  items-center bg-cover bg-no-repeat xl:bg-repeat-x  xl:bg-contain   px-4 w-full pt-[32px] pb-[94px]"
   >
     <div class="w-full max-w-[1156px]">
       <div class="h-auto bg-red-400 w-full rounded-[16px]">
@@ -37,4 +43,7 @@ import details from "@/assets/images/img/details.png";
 import detailsHero from "@/assets/images/img/detailsHero.png";
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
