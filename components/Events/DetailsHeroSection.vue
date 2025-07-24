@@ -1,12 +1,7 @@
 <template>
   <div
-   :style="{
-      backgroundImage: `url(${detailsHero})`,
-    
-     
-    
-    }"
-    class="flex flex-col  items-center bg-cover bg-no-repeat xl:bg-repeat-x  xl:bg-contain   px-4 w-full pt-[32px] pb-[94px]"
+  
+    class="flex flex-col relative items-center bg-secondary-1 overflow-hidden    px-4 w-full pt-[32px] pb-[94px]"
   >
     <div class="w-full max-w-[1156px]">
       <div class="h-auto bg-red-400 w-full rounded-[16px]">
@@ -35,12 +30,18 @@
         <p>Activity Fest</p>
       </div>
     </div>
+    <div class="flex gap-4 -bottom-[15.5px] absolute ">
+ <div v-for="(circle,index) in 1000" :key="index" class="rounded-full  h-[29px] w-[29px] bg-white">
+
+    </div>
+    </div>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import details from "@/assets/images/img/details.png";
-import detailsHero from "@/assets/images/img/detailsHero.png";
+
 </script>
 
 <style scoped>

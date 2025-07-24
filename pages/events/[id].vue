@@ -3,7 +3,7 @@
     <EventsDetailsHeroSection />
     <div class="lg:px-[142px]">
       <div
-        class="flex flex-col py-[56px] lg:flex-row border-b-[1px] border-b-[#CBD5E1] px-4 gap-[45px] 2xl:mx-auto"
+        class="flex flex-col py-[56px] lg:flex-row border-b-[1px] border-b-[#CBD5E1] px-4 mb-[100px] gap-[45px] 2xl:mx-auto"
       >
         <div class="flex flex-col w-full max-w-[741px] gap-[24px]">
           <div>
