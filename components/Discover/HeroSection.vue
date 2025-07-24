@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-secondary-1 h-[704px] flex flex-col mt-[64px] items-center dark:bg-purple-brown"
+    class="bg-secondary-1 h-[704px] flex flex-col py-[64px] items-center dark:bg-purple-brown"
   >
     <div class="flex flex-col px-2 text-center gap-[16px] sm:gap-[32px]">
       <div class="text-center px-4 sm:px-6 md:px-8">

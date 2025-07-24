@@ -1,8 +1,9 @@
 <template>
-  <div class="flex min-h-screen flex-col">
-    <main class="flex-1">
+  <div class="">
+    <CommonNavigation />
+    <div class="flex-1">
       <slot />
-    </main>
+    </div>
     <CommonFooter />
   </div>
 </template>
