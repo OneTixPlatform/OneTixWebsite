@@ -1,6 +1,11 @@
 <template>
   <header
-    class="sticky top-0 z-50 right-0 cursor-pointer py-[16px] px-[20px] xl:py-[20px] flex justify-between items-center xl:bg-secondary-1 xl:dark:bg-black-highest xl:px-[84px]"
+    :class="[
+      isScrolled
+        ? 'bg-white xl:bg-secondary-1 dark:bg-black-highest  fixed top-0 right-0 z-50'
+        : '',
+      'w-full cursor-pointer py-[16px] px-[20px] xl:py-[20px] flex justify-between items-center bg-secondary-1 dark:bg-black-highest xl:px-[84px]',
+    ]"
   >
     <!-- logo -->
     <div class="w-[140px] h-[48px]">
@@ -67,6 +72,22 @@ import oneTixWhite from "@/assets/images/logo/onetixWhite.png";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
+
+const isScrolled = ref(false);
+
+//Define helper functions
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10;
+};
+
+//Define lifecycle hooks
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 
 const links = [
   { name: "Discover events", path: "/" },

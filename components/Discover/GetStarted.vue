@@ -1,7 +1,7 @@
 <template>
   <div
     style="clip-path: polygon(0 1%, 100% 9%, 100% 100%, 0% 100%)"
-    class="lg:h-[626px] px-4 pb-[105px] relative w-full bg-secondary-1 dark:bg-purple-brown"
+    class="lg:h-[626px] px-4 pb-[105px] z-500 lg:z-0 relative w-full bg-secondary-1 dark:bg-purple-brown"
   >
     <div class="flex flex-col gap-[60px] items-center">
       <h1
