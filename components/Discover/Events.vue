@@ -1,14 +1,10 @@
 <template>
-  <div class="bg-white dark:bg-black-highest lg:px-[64px] px-[20px]">
+  <div class="bg-white dark:bg-black-highest lg:px-[64px] mt-[87px] px-[20px]">
     <div class="flex gap-[16px] items-center">
       <div class="flex gap-[4px] items-center">
         <IconsLocation />
         <MazDropdown
-          :items="[
-            { label: 'Italy', action: () => toast.success('CLICKED') },
-            { label: 'Spain', action: () => toast.success('CLICKED') },
-            { label: 'Germany', action: () => toast.success('CLICKED') },
-          ]"
+         
         >
           <span
             class="font-medium text-[16px] dark:text-[#EFF2F4] text-gray-background-7"
@@ -19,11 +15,6 @@
       <div class="flex gap-[4px] items-center">
         <IconsCalendar />
         <MazDropdown
-          :items="[
-            { label: 'Italy', action: () => toast.success('CLICKED') },
-            { label: 'Spain', action: () => toast.success('CLICKED') },
-            { label: 'Germany', action: () => toast.success('CLICKED') },
-          ]"
         >
           <span
             class="font-medium text-[16px] dark:text-[#EFF2F4] text-gray-background-7"

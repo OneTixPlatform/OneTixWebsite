@@ -7,7 +7,12 @@
       <h1
         class="font-extrabold text-center mt-[134px] md:text-[48px] text-[36px] lg:text-[72px] w-full max-w-[1020px] lg:leading-[72px] text-gray-background-9 dark:text-[#EFF2F4]"
       >
-        You’re the reason we built it. Everyone else just jumped on the
+       <span
+    class="underline decoration-dotted decoration-[#D43F68] decoration-3 underline-offset-[8px]"
+  >
+           You’re  
+  </span>
+ the reason we built it. Everyone else just jumped on the
         bandwagon
       </h1>
       <img
