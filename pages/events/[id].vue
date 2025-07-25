@@ -1,35 +1,43 @@
 <template>
-  <div class="">
+  <div class="bg-white dark:bg-black-highest">
     <EventsDetailsHeroSection />
-    <div class="lg:px-[142px]">
+    <div class="lg:px-[142px] pb-[100px]">
       <div
-        class="flex flex-col py-[56px] lg:flex-row border-b-[1px] border-b-[#CBD5E1] px-4 mb-[100px] gap-[45px] 2xl:mx-auto"
+        class="flex flex-col py-[56px] lg:flex-row lg:border-b-[1px] lg:border-b-[#CBD5E1] px-4 gap-[45px] 2xl:mx-auto"
       >
         <div class="flex flex-col w-full max-w-[741px] gap-[24px]">
           <div>
             <div class="flex gap-2 py-[12px] items-center">
               <IconsCalendar />
-              <p class="text-gray-background-8 text-[16px]">
+              <p class="text-gray-background-8 dark:text-[#CED4DA] text-[16px]">
                 Saturday, July 26th 2025
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
               <IconsTime />
-              <p class="text-gray-background-8 w-full text-[16px]">
+              <p
+                class="text-gray-background-8 dark:text-[#CED4DA] w-full text-[16px]"
+              >
                 10:00 AM - 4:00 PM UTC
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
               <IconsLocation />
-              <p class="text-gray-background-8 w-full text-[16px]">
+              <p
+                class="text-gray-background-8 dark:text-[#CED4DA] w-full text-[16px]"
+              >
                 2500 Capacity Auditorium, Federal University Of Technology,
                 Akure, Ondo State.
               </p>
             </div>
           </div>
           <div class="flex flex-col gap-[20px]">
-            <p class="font-500 text-[16px]">About this event</p>
-            <p class="font-normal text-[16px] text-gray-background-8">
+            <p class="font-500 dark:text-[#CED4DA] text-[16px]">
+              About this event
+            </p>
+            <p
+              class="font-normal text-[16px] text-gray-background-8 dark:text-[#CED4DA]"
+            >
               Welcome to the International Conference on Computing and Missions,
               Nigeria 2025! This year, we're gathering at the IITA Conference
               Center for a jam-packed event filled
@@ -45,7 +53,7 @@
               Computing and Missions, Nigeria 2025!
             </p>
           </div>
-          <div class="flex flex-col gap-[20px]">
+          <div class="flex dark:text-[#CED4DA] flex-col gap-[20px]">
             <p>Directions</p>
             <div class="w-full bg-[#CBD5E1] rounded-[16px] h-[302px]"></div>
           </div>

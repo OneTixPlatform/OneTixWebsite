@@ -1,5 +1,16 @@
 <template>
   <div
+    style="
+      clip-path: polygon(
+        100% 0,
+        100% 32%,
+        100% 88%,
+        76% 100%,
+        44% 92%,
+        0 92%,
+        0 0
+      );
+    "
     class="bg-secondary-1 h-[704px] flex flex-col py-[64px] items-center dark:bg-purple-brown"
   >
     <div class="flex flex-col px-2 text-center gap-[16px] sm:gap-[32px]">

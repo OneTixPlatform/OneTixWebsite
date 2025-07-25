@@ -1,10 +1,9 @@
 <template>
   <div
-  
-    class="flex flex-col relative items-center bg-secondary-1 overflow-hidden    px-4 w-full pt-[32px] pb-[94px]"
+    class="flex flex-col relative items-center bg-secondary-1 dark:bg-purple-brown overflow-hidden px-4 w-full pt-[32px] pb-[94px]"
   >
     <div class="w-full max-w-[1156px]">
-      <div class="h-auto bg-red-400 w-full rounded-[16px]">
+      <div class="h-auto w-full rounded-[16px]">
         <img
           :src="details"
           alt="details-image"
@@ -12,7 +11,7 @@
         />
       </div>
       <div
-        class="flex flex-col lg:flex-row w-full text-gray-background-8 font-medium text-[16px] justify-between mt-[16px]"
+        class="flex flex-col lg:flex-row w-full text-gray-background-8 dark:text-[#CED4DA] font-medium text-[16px] justify-between mt-[16px]"
       >
         <p>July 26, 2025</p>
         <div class="items-center hidden lg:flex gap-2">
@@ -21,30 +20,29 @@
         </div>
       </div>
       <p
-        class="text-gray-background-8 font-bold leading-[44px] mt-2 text-[36px]"
+        class="text-gray-background-8 dark:text-[#CED4DA] font-bold leading-[44px] mt-2 text-[36px]"
       >
         ÁLÓ - A FOLK MUSIC CONCERT EXPERIENCE
       </p>
-      <div class="flex items-center lg:hidden mt-[6px] gap-2">
+      <div
+        class="flex items-center dark:text-[#CED4DA] text-gray-background-8 lg:hidden mt-[6px] gap-2"
+      >
         <IconsActivity />
         <p>Activity Fest</p>
       </div>
     </div>
-    <div class="flex gap-4 -bottom-[15.5px] absolute ">
- <div v-for="(circle,index) in 1000" :key="index" class="rounded-full  h-[29px] w-[29px] bg-white">
-
+    <div class="flex gap-4 -bottom-[15.5px] absolute">
+      <div
+        v-for="(circle, index) in 1000"
+        :key="index"
+        class="rounded-full h-[29px] w-[29px] bg-white dark:bg-black-highest"
+      ></div>
     </div>
-    </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
 import details from "@/assets/images/img/details.png";
-
 </script>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>
