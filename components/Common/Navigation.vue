@@ -48,7 +48,7 @@
       <!-- login -->
       <div class="flex items-center cursor-pointer">
         <span
-          class="px-[24px] dark:text-white hidden xl:flex py-[8px] font-semibold text-[16px]"
+          class="px-[24px] text-gray-background-8 dark:text-white hidden xl:flex py-[8px] font-semibold text-[16px]"
           >Login</span
         >
         <button
