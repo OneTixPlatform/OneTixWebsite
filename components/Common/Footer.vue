@@ -3,7 +3,7 @@
     style="
       clip-path: polygon(20% 1%, 79% 11%, 100% 11%, 100% 100%, 0 100%, 0 10%);
     "
-    class="bg-black-highest sm:px-8 px-4 py-4 -mt-[60px] w-full flex flex-col items-center"
+    class="bg-black-highest sm:px-8 px-4 py-4 relative z-[100] -mt-[60px] w-full flex flex-col items-center"
   >
     <div
       class="w-full mt-[121px] flex flex-col gap-[16px] items-center justify-center"

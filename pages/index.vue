@@ -1,6 +1,7 @@
 <template>
-  <div class="">
+  <div class="bg-white dark:bg-black-highest">
     <DiscoverHeroSection />
+    <DiscoverEvents />
     <DiscoverGetStarted />
   </div>
 </template>

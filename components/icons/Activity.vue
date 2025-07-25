@@ -5,10 +5,11 @@
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    class="stroke-current text-[#64748B] dark:text-[#EFF2F4]"
   >
     <path
       d="M1 22H23"
-      stroke="#64748B"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-miterlimit="10"
       stroke-linecap="round"
@@ -16,7 +17,7 @@
     />
     <path
       d="M19.78 22.0098V17.5498"
-      stroke="#64748B"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-miterlimit="10"
       stroke-linecap="round"
@@ -24,7 +25,7 @@
     />
     <path
       d="M19.8 10.8901C18.58 10.8901 17.6 11.8701 17.6 13.0901V15.3601C17.6 16.5801 18.58 17.5601 19.8 17.5601C21.02 17.5601 22 16.5801 22 15.3601V13.0901C22 11.8701 21.02 10.8901 19.8 10.8901Z"
-      stroke="#64748B"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-miterlimit="10"
       stroke-linecap="round"
@@ -32,7 +33,7 @@
     />
     <path
       d="M2.09998 21.9998V6.02979C2.09998 4.01979 3.10003 3.00977 5.09003 3.00977H11.32C13.31 3.00977 14.3 4.01979 14.3 6.02979V21.9998"
-      stroke="#64748B"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-miterlimit="10"
       stroke-linecap="round"
@@ -40,7 +41,7 @@
     />
     <path
       d="M5.80005 8.25H10.7501"
-      stroke="#64748B"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-miterlimit="10"
       stroke-linecap="round"
@@ -48,7 +49,7 @@
     />
     <path
       d="M5.80005 12H10.7501"
-      stroke="#64748B"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-miterlimit="10"
       stroke-linecap="round"
@@ -56,7 +57,7 @@
     />
     <path
       d="M8.25 22V18.25"
-      stroke="#64748B"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-miterlimit="10"
       stroke-linecap="round"
