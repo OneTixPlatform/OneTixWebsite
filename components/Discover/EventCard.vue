@@ -2,7 +2,7 @@
   <div class="h-[313px] relative max-w-[304px] w-full cursor-pointer">
     <div class="h-[147px] relative w-full overflow-hidden group rounded-[16px]">
       <img
-        :src="details"
+        :src="eventData.imageUrl"
         alt=""
         class="object-center object-cover h-full w-full rounded-[16px] transform transition-transform duration-300 ease-in-out group-hover:scale-105"
       />
@@ -14,15 +14,17 @@
       </div>
     </div>
     <div class="mt-[12px] flex flex-col gap-[6px]">
-        <NuxtLink :to="'/events/24'">
- <p
-        class="font-medium text-[18px] hover:underline text-gray-background-8 leading-[23px] dark:text-[#EFF2F4]"
-      >
-        ÁLÓ - A FOLK MUSIC CONCERT EXPEREINCE
-      </p>
-        </NuxtLink>
+      <NuxtLink :to="`/events/${eventData.id}`">
+        <p
+          class="font-medium text-[18px] hover:underline text-gray-background-8 leading-[23px] dark:text-[#EFF2F4]"
+        >
+          {{ eventData.title }}
+        </p>
+      </NuxtLink>
 
-      <p class="text-[#64748B] text-[14px dark:text-[#CED4DA]">Activity Fest</p>
+      <p class="text-[#64748B] text-[14px dark:text-[#CED4DA]">
+        {{ eventData.description }}
+      </p>
       <div class="flex items-center gap-[8px]">
         <span
           class="text-[14px] leading-[18px] dark:text-[#EFF2F4] text-gray-background-8"
@@ -50,8 +52,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import details from "@/assets/images/img/details.png";
+
+const props = defineProps(["eventData"]);
 </script>
 
 <style scoped></style>

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white dark:bg-black-highest">
-    <EventsDetailsHeroSection />
+    <EventsDetailsHeroSection :eventData="eventData" />
     <div class="lg:px-[142px] pb-[100px]">
       <div
         class="flex flex-col py-[56px] lg:flex-row lg:border-b-[1px] lg:border-b-[#CBD5E1] px-4 gap-[45px] 2xl:mx-auto"
@@ -26,8 +26,7 @@
               <p
                 class="text-gray-background-8 dark:text-[#CED4DA] w-full text-[16px]"
               >
-                2500 Capacity Auditorium, Federal University Of Technology,
-                Akure, Ondo State.
+                {{ eventData.location }}
               </p>
             </div>
           </div>
@@ -38,34 +37,44 @@
             <p
               class="font-normal text-[16px] text-gray-background-8 dark:text-[#CED4DA]"
             >
-              Welcome to the International Conference on Computing and Missions,
-              Nigeria 2025! This year, we're gathering at the IITA Conference
-              Center for a jam-packed event filled
-              with innovative ideas, networking opportunities, and inspiring
-              speakers. Join us as we explore the intersection
-              of technology and missions, and how they can work together to
-              create a better world. Whether you're a seasoned professional or
-              just starting out in the field, this conference is the perfect
-              place to learn, grow, and connect with like-minded individuals.
-              Don't miss out on this incredible opportunity to be part of
-              something truly special. Mark your calendars and get ready for an
-              unforgettable experience at the International Conference on
-              Computing and Missions, Nigeria 2025!
+              {{ eventData.description }}
             </p>
           </div>
           <div class="flex dark:text-[#CED4DA] flex-col gap-[20px]">
             <p>Directions</p>
-            <div class="w-full bg-[#CBD5E1] rounded-[16px] h-[302px]"></div>
+            <!-- <div class="w-full bg-[#CBD5E1] rounded-[16px] h-[302px]"></div> -->
+            <div class="w-full h-[300px] rounded-[16px] overflow-hidden">
+              <iframe
+                :src="`https://www.google.com/maps?q=${encodeURIComponent(eventData.location)}&output=embed`"
+                width="100%"
+                height="100%"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
         </div>
         <div class="">
-          <EventsGetTicket />
+          <EventsGetTicket :eventData="eventData" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup>
+import { useRoute } from "vue-router";
+import { useDocument } from "vuefire";
+import { useFirestore } from "vuefire";
+import { doc } from "firebase/firestore";
+
+const route = useRoute();
+const db = useFirestore();
+
+const eventRef = doc(db, "events", route.params.id);
+const eventData = useDocument(eventRef);
+</script>
 
 <style scoped></style>

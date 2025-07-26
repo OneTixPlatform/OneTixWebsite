@@ -3,9 +3,7 @@
     <div class="flex gap-[16px] items-center">
       <div class="flex gap-[4px] items-center">
         <IconsLocation />
-        <MazDropdown
-         
-        >
+        <MazDropdown>
           <span
             class="font-medium text-[16px] dark:text-[#EFF2F4] text-gray-background-7"
             >Lagos</span
@@ -14,8 +12,7 @@
       </div>
       <div class="flex gap-[4px] items-center">
         <IconsCalendar />
-        <MazDropdown
-        >
+        <MazDropdown>
           <span
             class="font-medium text-[16px] dark:text-[#EFF2F4] text-gray-background-7"
             >Date</span
@@ -28,7 +25,11 @@
       <div
         class="flex gap-4 lg:grid lg:grid-cols-4 2xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
       >
-        <DiscoverEventCard v-for="n in 10" :key="n" />
+        <DiscoverEventCard
+          :eventData="event"
+          v-for="(event, index) in events"
+          :key="index"
+        />
       </div>
     </div>
 
@@ -40,7 +41,18 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { useCollection } from "vuefire";
+import { collection } from "firebase/firestore";
+import { useFirestore } from "vuefire";
+
+const db = useFirestore();
+const events = useCollection(collection(db, "events"));
+
+onMounted(() => {
+  console.log(events);
+});
+
 const cities = [
   { name: "Lagos", value: "lagos" },
   { name: "Abuja", value: "abuja" },

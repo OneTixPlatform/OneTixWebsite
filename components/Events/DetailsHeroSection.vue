@@ -3,11 +3,11 @@
     class="flex flex-col relative items-center bg-secondary-1 dark:bg-purple-brown overflow-hidden px-4 w-full pt-[32px] pb-[94px]"
   >
     <div class="w-full max-w-[1156px]">
-      <div class="h-auto w-full rounded-[16px]">
+      <div class="h-[380px] w-full rounded-[16px]">
         <img
-          :src="details"
+          :src="eventData.imageUrl"
           alt="details-image"
-          class="object-contain w-full h-full"
+          class="object-cover object-center rounded-[16px] w-full h-full"
         />
       </div>
       <div
@@ -22,7 +22,7 @@
       <p
         class="text-gray-background-8 dark:text-[#CED4DA] font-bold leading-[44px] mt-2 text-[36px]"
       >
-        ÁLÓ - A FOLK MUSIC CONCERT EXPERIENCE
+        {{ eventData.title }}
       </p>
       <div
         class="flex items-center dark:text-[#CED4DA] text-gray-background-8 lg:hidden mt-[6px] gap-2"
@@ -41,8 +41,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import details from "@/assets/images/img/details.png";
+
+const props = defineProps(["eventData"]);
 </script>
 
 <style scoped></style>
