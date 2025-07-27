@@ -8,6 +8,19 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import LogoIcon from "@/assets/images/logo/logoIcon.png";
+
+useHead({
+  link: [
+    {
+      rel: "icon",
+      type: "image/x-icon",
+      href: LogoIcon,
+    },
+  ],
+});
+
+</script>
 
 <style scoped></style>

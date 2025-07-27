@@ -13,7 +13,7 @@
       <div
         class="flex flex-col lg:flex-row w-full text-gray-background-8 dark:text-[#CED4DA] font-medium text-[16px] justify-between mt-[16px]"
       >
-        <p>July 26, 2025</p>
+        <p>{{ formatDate(eventData.eventDate) }}</p>
         <div class="items-center hidden lg:flex gap-2">
           <IconsActivity />
           <p>Activity Fest</p>
@@ -43,6 +43,7 @@
 
 <script setup>
 import details from "@/assets/images/img/details.png";
+import {formatDate,formatTime} from '@/utils/helpers'
 
 const props = defineProps(["eventData"]);
 </script>
