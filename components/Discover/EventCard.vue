@@ -3,14 +3,15 @@
     <div class="h-[147px] relative w-full overflow-hidden group rounded-[16px]">
       <img
         :src="eventData.imageUrl"
-        alt=""
+        alt="event-image"
         class="object-center object-cover h-full w-full rounded-[16px] transform transition-transform duration-300 ease-in-out group-hover:scale-105"
       />
       <div
         class="rounded-[16px] bg-[#334155E5] flex items-center gap-[6px] absolute bottom-2 right-2 px-[10px] py-[2px]"
       >
         <div class="h-[8px] w-[8px] rounded-full bg-white"></div>
-        <span class="text-[12px] text-white">Free</span>
+        <span v-if="eventData?.isFree" class="text-[12px] text-white">Free</span>
+             <span v-if="eventData?.price" class="text-[12px] text-white">{{ formatCurrency(eventData.price) }}</span>
       </div>
     </div>
     <div class="mt-[12px] flex flex-col gap-[6px]">
@@ -22,7 +23,7 @@
         </p>
       </NuxtLink>
 
-      <p class="text-[#64748B] text-[14px dark:text-[#CED4DA]">
+      <p class="text-[#64748B] clamp-3 text-[14px dark:text-[#CED4DA]">
         {{ eventData.description }}
       </p>
       <div class="flex items-center gap-[8px]">
@@ -34,9 +35,9 @@
           <div
             class="h-[8px] w-[8px] rounded-full bg-[#64748B] dark:bg-[#CED4DA]"
           ></div>
-          <span class="text-[14px] leading-[18px] dark:text-[#EFF2F4]"
-            >{{ formatTime(eventData.eventDate) }}</span
-          >
+          <span class="text-[14px] leading-[18px] dark:text-[#EFF2F4]">{{
+            formatTime(eventData.eventDate)
+          }}</span>
         </div>
       </div>
     </div>
@@ -54,7 +55,7 @@
 
 <script setup>
 import details from "@/assets/images/img/details.png";
-import {formatDate,formatTime} from '@/utils/helpers'
+import { formatDate, formatTime ,formatCurrency} from "@/utils/helpers";
 
 const props = defineProps(["eventData"]);
 </script>

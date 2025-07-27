@@ -10,7 +10,7 @@
             <div class="flex gap-2 py-[12px] items-center">
               <IconsCalendar />
               <p class="text-gray-background-8 dark:text-[#CED4DA] text-[16px]">
-              {{ formatDate(eventData.eventDate) }}
+                {{ formatDate(eventData.eventDate) }}
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
@@ -18,7 +18,7 @@
               <p
                 class="text-gray-background-8 dark:text-[#CED4DA] w-full text-[16px]"
               >
-            {{ formatTime(eventData.eventDate) }}
+                {{ formatTime(eventData.eventDate) }}
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
@@ -57,10 +57,11 @@
           </div>
         </div>
         <div class="">
-          <EventsGetTicket :eventData="eventData" />
+          <EventsGetTicket :eventData="eventData" @showCheckout="showCheckout = true" />
         </div>
       </div>
     </div>
+    <CheckoutModal v-if="showCheckout" :event="eventData" @close="showCheckout = false" />
   </div>
 </template>
 
@@ -69,18 +70,16 @@ import { useRoute } from "vue-router";
 import { useDocument } from "vuefire";
 import { useFirestore } from "vuefire";
 import { doc } from "firebase/firestore";
-import {formatDate,formatTime} from '@/utils/helpers'
-
-
+import { formatDate, formatTime } from "@/utils/helpers";
 
 const route = useRoute();
 const db = useFirestore();
 
+
+const showCheckout = ref(false)
+
 const eventRef = doc(db, "events", route.params.id);
 const eventData = useDocument(eventRef);
-
-
-
 </script>
 
 <style scoped></style>
