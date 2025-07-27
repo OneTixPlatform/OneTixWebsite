@@ -10,7 +10,7 @@
             <div class="flex gap-2 py-[12px] items-center">
               <IconsCalendar />
               <p class="text-gray-background-8 dark:text-[#CED4DA] text-[16px]">
-                Saturday, July 26th 2025
+              {{ formatDate(eventData.eventDate) }}
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
@@ -18,7 +18,7 @@
               <p
                 class="text-gray-background-8 dark:text-[#CED4DA] w-full text-[16px]"
               >
-                10:00 AM - 4:00 PM UTC
+            {{ formatTime(eventData.eventDate) }}
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
@@ -69,12 +69,18 @@ import { useRoute } from "vue-router";
 import { useDocument } from "vuefire";
 import { useFirestore } from "vuefire";
 import { doc } from "firebase/firestore";
+import {formatDate,formatTime} from '@/utils/helpers'
+
+
 
 const route = useRoute();
 const db = useFirestore();
 
 const eventRef = doc(db, "events", route.params.id);
 const eventData = useDocument(eventRef);
+
+
+
 </script>
 
 <style scoped></style>

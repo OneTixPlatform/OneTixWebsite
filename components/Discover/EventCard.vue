@@ -28,14 +28,14 @@
       <div class="flex items-center gap-[8px]">
         <span
           class="text-[14px] leading-[18px] dark:text-[#EFF2F4] text-gray-background-8"
-          >Sat 26 July, 2025</span
+          >{{ formatDate(eventData.eventDate) }}</span
         >
         <div class="flex items-center gap-[8px] text-gray-background-8">
           <div
             class="h-[8px] w-[8px] rounded-full bg-[#64748B] dark:bg-[#CED4DA]"
           ></div>
           <span class="text-[14px] leading-[18px] dark:text-[#EFF2F4]"
-            >3:30 PM</span
+            >{{ formatTime(eventData.eventDate) }}</span
           >
         </div>
       </div>
@@ -54,6 +54,7 @@
 
 <script setup>
 import details from "@/assets/images/img/details.png";
+import {formatDate,formatTime} from '@/utils/helpers'
 
 const props = defineProps(["eventData"]);
 </script>

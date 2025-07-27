@@ -46,6 +46,7 @@ import { useCollection } from "vuefire";
 import { collection } from "firebase/firestore";
 import { useFirestore } from "vuefire";
 
+
 const db = useFirestore();
 const events = useCollection(collection(db, "events"));
 
