@@ -43,7 +43,7 @@
 
 <script setup>
 import details from "@/assets/images/img/details.png";
-import {formatDate,formatTime} from '@/utils/helpers'
+import { formatDate, formatTime } from "@/utils/helpers";
 
 const props = defineProps(["eventData"]);
 </script>
