@@ -24,6 +24,7 @@
     "nuxt": "^3.17.7",
     "nuxt-vuefire": "^1.1.0",
     "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.4.1",
     "remixicon": "^4.6.0",
     "tailwindcss": "^4.1.11",
     "vue": "^3.5.17",
@@ -31,7 +32,6 @@
     "vuefire": "^3.2.2"
   },
   "devDependencies": {
-    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "prettier": "3.6.2"
   }
 }

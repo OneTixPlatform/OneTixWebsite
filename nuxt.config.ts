@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     "maz-ui/nuxt",
     "@nuxtjs/color-mode",
     "nuxt-vuefire",
-    "@pinia-plugin-persistedstate/nuxt",
   ],
   colorMode: {
     classSuffix: "",
