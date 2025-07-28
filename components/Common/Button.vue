@@ -7,7 +7,6 @@
     <MazSpinner v-if="loading" color="white" size="1em" />
   </button>
 </template>
-
 <script setup>
 const props = defineProps({
   label: {
