@@ -13,6 +13,7 @@
   "dependencies": {
     "@firebase/app-types": "^0.9.3",
     "@nuxtjs/color-mode": "^3.5.2",
+    "@pinia/nuxt": "^0.11.2",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/vite": "^4.1.11",
     "dayjs": "^1.11.13",
@@ -22,6 +23,9 @@
     "maz-ui": "^3.50.1",
     "nuxt": "^3.17.7",
     "nuxt-vuefire": "^1.1.0",
+    "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.4.1",
+    "remixicon": "^4.6.0",
     "tailwindcss": "^4.1.11",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",

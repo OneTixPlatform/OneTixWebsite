@@ -57,11 +57,18 @@
           </div>
         </div>
         <div class="">
-          <EventsGetTicket :eventData="eventData" @showCheckout="showCheckout = true" />
+          <EventsGetTicket
+            :eventData="eventData"
+            @showCheckout="showCheckout = true"
+          />
         </div>
       </div>
     </div>
-    <CheckoutModal v-if="showCheckout" :event="eventData" @close="showCheckout = false" />
+    <CheckoutModal
+      v-if="showCheckout"
+      :event="eventData"
+      @close="clearCheckout"
+    />
   </div>
 </template>
 
@@ -75,11 +82,16 @@ import { formatDate, formatTime } from "@/utils/helpers";
 const route = useRoute();
 const db = useFirestore();
 
-
-const showCheckout = ref(false)
+const showCheckout = ref(false);
+const ticketStore = useTicketStore();
 
 const eventRef = doc(db, "events", route.params.id);
 const eventData = useDocument(eventRef);
+
+const clearCheckout = () => {
+  showCheckout.value = false;
+  ticketStore.resetStore();
+};
 </script>
 
 <style scoped></style>

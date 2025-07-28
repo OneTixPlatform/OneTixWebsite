@@ -43,21 +43,17 @@
 
 <script setup>
 import { useCollection } from "vuefire";
-import { collection, query, orderBy,limit } from 'firebase/firestore'
+import { collection, query, orderBy, limit } from "firebase/firestore";
 import { useFirestore } from "vuefire";
 
 const db = useFirestore();
 
 const eventsQuery = query(
-  collection(db, 'events'),
-  orderBy('eventDate', 'asc'), 
-  limit(10)                    
-)
-const events = useCollection(eventsQuery)
-
-onMounted(() => {
-  console.log(events);
-});
+  collection(db, "events"),
+  orderBy("eventDate", "asc"),
+  limit(10),
+);
+const events = useCollection(eventsQuery);
 
 const cities = [
   { name: "Lagos", value: "lagos" },
