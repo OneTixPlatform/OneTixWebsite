@@ -19,12 +19,11 @@ export function formatTime(timestamp: {
   return dayjs.unix(timestamp.seconds).format("h:mm A");
 }
 
-
-export function formatCurrency(amount:number) {
-  if (typeof amount !== 'number') return ''
-  return new Intl.NumberFormat('en-NG', {
-    style: 'currency',
-    currency: 'NGN',
+export function formatCurrency(amount: number) {
+  if (typeof amount !== "number") return "";
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
     minimumFractionDigits: 0,
-  }).format(amount)
+  }).format(amount);
 }

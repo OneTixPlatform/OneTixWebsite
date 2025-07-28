@@ -76,6 +76,11 @@ body {
   overflow: hidden;
 }
 
+/* Hide number input arrows in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* overflow tests */
 /* * {
   outline: 1px solid red !important;

@@ -1,4 +1,5 @@
 <template>
+  <NuxtLink :to="`/events/${eventData.id}`">
   <div class="h-[313px] relative max-w-[304px] w-full cursor-pointer">
     <div class="h-[147px] relative w-full overflow-hidden group rounded-[16px]">
       <img
@@ -10,18 +11,22 @@
         class="rounded-[16px] bg-[#334155E5] flex items-center gap-[6px] absolute bottom-2 right-2 px-[10px] py-[2px]"
       >
         <div class="h-[8px] w-[8px] rounded-full bg-white"></div>
-        <span v-if="eventData?.isFree" class="text-[12px] text-white">Free</span>
-             <span v-if="eventData?.price" class="text-[12px] text-white">{{ formatCurrency(eventData.price) }}</span>
+        <span v-if="eventData?.isFree" class="text-[12px] text-white"
+          >Free</span
+        >
+        <span v-if="eventData?.price" class="text-[12px] text-white">{{
+          formatCurrency(eventData.price)
+        }}</span>
       </div>
     </div>
     <div class="mt-[12px] flex flex-col gap-[6px]">
-      <NuxtLink :to="`/events/${eventData.id}`">
+    
         <p
           class="font-medium text-[18px] hover:underline text-gray-background-8 leading-[23px] dark:text-[#EFF2F4]"
         >
           {{ eventData.title }}
         </p>
-      </NuxtLink>
+
 
       <p class="text-[#64748B] clamp-3 text-[14px dark:text-[#CED4DA]">
         {{ eventData.description }}
@@ -51,11 +56,13 @@
       class="absolute top-[75px] -translate-y-1/2 -right-[15px] h-[40px] w-[40px] rounded-full bg-white dark:bg-black-highest z-10"
     ></div>
   </div>
+  </NuxtLink>
+
 </template>
 
 <script setup>
 import details from "@/assets/images/img/details.png";
-import { formatDate, formatTime ,formatCurrency} from "@/utils/helpers";
+import { formatDate, formatTime, formatCurrency } from "@/utils/helpers";
 
 const props = defineProps(["eventData"]);
 </script>
