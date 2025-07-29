@@ -102,6 +102,8 @@ import { doc } from "firebase/firestore";
 import { formatDate, formatTime } from "@/utils/helpers";
 import useClipboard from 'vue-clipboard3'
 
+
+const toast = useToast()
 const route = useRoute();
 const db = useFirestore();
 const showCheckout = ref(false);
@@ -140,10 +142,14 @@ const qrColors = computed(() => {
       try {
             const url = eventUrl.value
         await toClipboard(url)
+        toast.message("Link Copied to clipboard")
       } catch (e) {
         console.error(e)
       }
     }
+
+    
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

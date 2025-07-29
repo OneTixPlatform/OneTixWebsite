@@ -1,5 +1,6 @@
 <template>
   <div class="py-[16px] flex justify-between">
+    <!-- Ticket Info -->
     <div class="flex flex-col gap-[8px]">
       <p
         :class="[
@@ -18,6 +19,8 @@
         >
           {{ formatCurrency(ticket.price) }}
         </p>
+
+        <!-- Sold Out Badge -->
         <div
           v-if="ticket.available <= 0"
           class="h-[16px] rounded-[16px] bg-[#FFFBEB] flex px-[8px] py-[2px] items-center justify-center"
@@ -35,52 +38,67 @@
         {{ ticket.description }}
       </p>
     </div>
-    <div class="">
-      <CommonNumberInput
-        v-if="ticket.available > 0"
-        v-model="localAmount"
-        :ticket="ticket"
-        :disabled="isDisabled"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @update:modelValue="handleAmountChange"
-      />
-    </div>
+
+    <!-- Quantity Dropdown -->
+    <div>
+ <MazDropdown
+  v-if="ticket.available > 0"
+  :items="dropdownItems"
+  :disabled="isDisabled"
+  class="custom-dropdown no-dark-mode"
+  :class="[
+    'rounded-[16px]',
+    isDisabled
+      ? 'bg-[#E2E8F0]  border border-gray-300 text-gray-400'
+      : 'bg-white border border-[#E2E8F0] text-[#1E293B]'
+  ]"
+>
+  <span :class="[isDisabled ? 'dark:text-white':'']" class="block text-[15px] font-medium text-[#1E293B]">
+    {{ selectedAmount === 0 ? 'Select' : `${selectedAmount} ticket(s)` }}
+  </span>
+</MazDropdown>
+
+</div>
   </div>
 </template>
 
 <script setup>
+import { ref, computed } from "vue";
 import { formatCurrency } from "@/utils/helpers";
 
-const ticketStore = useTicketStore();
-const props = defineProps(["ticket", "isEditing", "currentlyEditingId"]);
-const isDisabled = computed(
-  () => props.isEditing && props.currentlyEditingId !== props.ticket.id,
-);
 
+const props = defineProps(["ticket", "isEditing", "currentlyEditingId"]);
 const emit = defineEmits(["focus", "blur"]);
 
-function handleFocus() {
-  emit("focus", props.ticket.id);
-}
-function handleBlur() {
-  emit("blur");
-}
+const ticketStore = useTicketStore();
+const selectedAmount = ref(0); // 🆕 tracks local amount
 
-const localAmount = ref(0);
-function handleAmountChange(newAmount) {
-  const parsedAmount = Number(newAmount);
+const isDisabled = computed(() => {
+  return props.isEditing && props.currentlyEditingId !== props.ticket.id;
+});
 
-  if (parsedAmount > 0) {
+const dropdownItems = computed(() => {
+  return Array.from({ length: props.ticket.available + 1 }, (_, i) => ({
+    label: i === 0 ? "0 (Clear)" : `${i}`,
+    action: () => handleAmountChange(i),
+  }));
+});
+
+function handleAmountChange(amount) {
+  selectedAmount.value = amount; // 🆕 update local label
+
+  if (amount > 0) {
     ticketStore.setTicket(props.ticket);
-
-    ticketStore.setTicketAmount(parsedAmount);
+    ticketStore.setTicketAmount(amount);
+    emit("focus", props.ticket.id);
   } else {
-    localAmount.value = 0;
     ticketStore.resetStore();
     emit("blur");
   }
 }
+
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
