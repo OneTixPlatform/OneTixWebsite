@@ -37,7 +37,12 @@
     </div>
     <div class="">
       <CommonNumberInput
-        v-model="ticketStore.ticketAmount"
+        v-if="ticket.available > 0"
+        v-model="localAmount"
+        :ticket="ticket"
+        :disabled="isDisabled"
+        @focus="handleFocus"
+        @blur="handleBlur"
         @update:modelValue="handleAmountChange"
       />
     </div>
@@ -46,10 +51,23 @@
 
 <script setup>
 import { formatCurrency } from "@/utils/helpers";
-const props = defineProps(["ticket"]);
 
 const ticketStore = useTicketStore();
+const props = defineProps(["ticket", "isEditing", "currentlyEditingId"]);
+const isDisabled = computed(
+  () => props.isEditing && props.currentlyEditingId !== props.ticket.id,
+);
 
+const emit = defineEmits(["focus", "blur"]);
+
+function handleFocus() {
+  emit("focus", props.ticket.id);
+}
+function handleBlur() {
+  emit("blur");
+}
+
+const localAmount = ref(0);
 function handleAmountChange(newAmount) {
   const parsedAmount = Number(newAmount);
 
@@ -57,7 +75,9 @@ function handleAmountChange(newAmount) {
     ticketStore.setTicket(props.ticket);
     ticketStore.setTicketAmount(parsedAmount);
   } else {
+    localAmount.value = 0;
     ticketStore.resetStore();
+    emit("blur");
   }
 }
 </script>

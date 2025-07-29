@@ -55,6 +55,23 @@
               ></iframe>
             </div>
           </div>
+
+          <div class="flex flex-col gap-[16px]">
+            <p>Scan or share this QR code to view event:</p>
+            <Qrcode
+      :value="eventUrl"
+      variant="pixelated"
+      height="100"
+      width="100"
+       :foreground="qrColors.foreground"
+  :background="qrColors.background"
+    />
+    <div @click="toggleeventUrl" class="rounded-[8px] bg-[#F1F5F9] px-[12px] py-[8px] flex gap-[8px] cursor-pointer items-center w-[150px]">
+      <IconsLightning/>
+      <span class="text-[12px] font-medium text-gray-background-7">Share Event Link</span>
+    </div>
+    <p v-if="showEventUrl" class="text-gray-background-7 dark:text-white text-[18px]">{{ eventUrl }}</p>
+          </div>
         </div>
         <div class="">
           <EventsGetTicket
@@ -81,9 +98,10 @@ import { formatDate, formatTime } from "@/utils/helpers";
 
 const route = useRoute();
 const db = useFirestore();
-
+const showEventUrl = ref(false)
 const showCheckout = ref(false);
 const ticketStore = useTicketStore();
+const colorMode = useColorMode();
 
 const eventRef = doc(db, "events", route.params.id);
 const eventData = useDocument(eventRef);
@@ -92,6 +110,24 @@ const clearCheckout = () => {
   showCheckout.value = false;
   ticketStore.resetStore();
 };
+
+const toggleeventUrl = () => {
+  showEventUrl.value = !showEventUrl.value
+}
+
+const eventUrl = computed(() => {
+  const baseUrl = "https://onetix.com/event"; // Replace with your actual base URL
+  return `${baseUrl}/${route.params.id}`;
+});
+
+
+const qrColors = computed(() => {
+  return {
+    foreground: colorMode.value === "dark" ? "#FFFFFF" : "#000000",
+    background: "transparent", // Optional: to match the page background
+  };
+});
+
 </script>
 
 <style scoped></style>

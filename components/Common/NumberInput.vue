@@ -5,7 +5,9 @@
     <input
       type="number"
       v-model.number="localValue"
-      @blur="emitChange"
+      :disabled="disabled"
+      @blur="() => emit('blur')"
+      @focus="onFocus"
       @keydown.enter="emitChange"
       class="appearance-none w-[48px] text-[16px] text-[#0F172A] font-medium text-center outline-none bg-transparent [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
     />
@@ -15,7 +17,8 @@
       class="h-[24px] w-[24px] rounded-[12px] flex flex-col gap-2 justify-center items-center bg-[#F1F5F9]"
     >
       <button
-        @click="increment"
+        @click="handleIncrement"
+        :disabled="disabled"
         class="leading-0 font-bold text-[#94A3B8] m-0 p-0"
       >
         <i
@@ -23,7 +26,8 @@
         ></i>
       </button>
       <button
-        @click="decrement"
+        @click="handleDecrement"
+        :disabled="disabled"
         class="leading-0 font-bold text-[#94A3B8] m-0 p-0"
       >
         <i
@@ -42,9 +46,13 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "focus", "blur"]);
 
 const localValue = ref(props.modelValue);
 
@@ -55,6 +63,19 @@ watch(
     localValue.value = val;
   },
 );
+
+const onFocus = () => {
+  emit("focus");
+};
+const handleIncrement = () => {
+  onFocus(); // trigger editing
+  increment();
+};
+
+const handleDecrement = () => {
+  onFocus(); // trigger editing
+  decrement();
+};
 
 const emitChange = () => {
   emit("update:modelValue", localValue.value || 0);

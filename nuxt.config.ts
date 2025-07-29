@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     "maz-ui/nuxt",
     "@nuxtjs/color-mode",
     "nuxt-vuefire",
+      'nuxt-qrcode'
   ],
   colorMode: {
     classSuffix: "",
@@ -33,6 +34,20 @@ export default defineNuxtConfig({
     auth: {
       enabled: true,
       sessionCookies: true,
+    },
+  },
+   qrcode: {
+    options: {
+      // variant: 'pixelated',
+      // OR
+      variant: {
+        inner: 'circle',
+        marker: 'rounded',
+        pixel: 'rounded',
+      },
+      radius: 1,
+      // blackColor: 'currentColor', // 'var(--ui-text-highlighted)' if you are using `@nuxt/ui` v3
+      // whiteColor: 'transparent',  // 'var(--ui-bg)'
     },
   },
   vite: {
