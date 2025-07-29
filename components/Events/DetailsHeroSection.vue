@@ -11,25 +11,25 @@
         />
       </div>
       <div
-        class="flex flex-col lg:flex-row w-full text-gray-background-8 dark:text-[#CED4DA] font-medium text-[16px] justify-between mt-[16px]"
+        class="flex flex-col lg:flex-row w-full text-gray-background-8 dark:text-[#CED4DA] font-medium text-[16px]  mt-[16px]"
       >
         <p>{{ formatDate(eventData.eventDate) }}</p>
-        <div class="items-center hidden lg:flex gap-2">
+        <!-- <div class="items-center hidden lg:flex gap-2">
           <IconsActivity />
           <p>Activity Fest</p>
-        </div>
+        </div> -->
       </div>
       <p
         class="text-gray-background-8 dark:text-[#CED4DA] font-bold leading-[44px] mt-2 text-[36px]"
       >
         {{ eventData.title }}
       </p>
-      <div
+      <!-- <div
         class="flex items-center dark:text-[#CED4DA] text-gray-background-8 lg:hidden mt-[6px] gap-2"
       >
         <IconsActivity />
         <p>Activity Fest</p>
-      </div>
+      </div> -->
     </div>
     <div class="flex gap-4 -bottom-[15.5px] absolute">
       <div

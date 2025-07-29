@@ -4,6 +4,16 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  app: {
+    head: {
+      script: [
+        {
+          src: "https://js.paystack.co/v1/inline.js",
+          defer: true,
+        },
+      ],
+    },
+  },
   css: ["~/assets/css/main.css", "remixicon/fonts/remixicon.css"],
   modules: [
     [
@@ -34,6 +44,12 @@ export default defineNuxtConfig({
     auth: {
       enabled: true,
       sessionCookies: true,
+    },
+  },
+
+  runtimeConfig: {
+    public: {
+      PAYSTACK_PUBLIC_KEY: process.env.NUXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
     },
   },
   qrcode: {

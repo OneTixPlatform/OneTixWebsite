@@ -89,6 +89,7 @@ const form = reactive({
 
 const togglePaystack = () => {
   usePaystack.value = !usePaystack.value;
+  ticketStore.setPaystack(usePaystack.value)
 };
 
 watch(

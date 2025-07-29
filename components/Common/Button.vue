@@ -1,6 +1,6 @@
 <template>
   <button
-    class="flex items-center cursor-pointer rounded-[12px] gap-2 btn justify-center"
+    class="flex items-center btn rounded-[12px] gap-2 btn justify-center"
     :disabled="loading"
   >
     <p class="font-semibold text-[16px]">{{ props.label }}</p>
