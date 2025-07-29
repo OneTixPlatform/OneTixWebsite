@@ -5,11 +5,17 @@
     <p class="font-medium px-2 text-[16px] text-gray-background-8">
       {{ eventData.title }}
     </p>
-    <p v-if="eventData.price > 0" class="text-secondary-5 px-2 text-[16px] font-regular">
+    <p
+      v-if="eventData.price > 0"
+      class="text-secondary-5 px-2 text-[16px] font-regular"
+    >
       From {{ formatCurrency(eventData.price) }}
     </p>
-       <p v-if="eventData.isFree" class="text-secondary-5 px-2 text-[16px] font-regular">
-    Free
+    <p
+      v-if="eventData.isFree"
+      class="text-secondary-5 px-2 text-[16px] font-regular"
+    >
+      Free
     </p>
     <div
       @click="$emit('showCheckout')"
@@ -30,11 +36,6 @@
 import { formatCurrency } from "@/utils/helpers";
 const props = defineProps(["eventData"]);
 const emit = defineEmits(["showCheckout"]);
-
-
-
-
-
 </script>
 
 <style lang="scss" scoped></style>
