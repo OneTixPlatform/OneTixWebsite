@@ -9,20 +9,34 @@
         <div class="flex items-center gap-[24px]">
           <div
             @click="previousStep"
+            v-if="!showSuccess"
             class="flex items-center cusor.pointer border border-[#E2E8F0] justify-center h-[36px] w-[36px] rounded-full"
           >
             <IconsArrowLeft />
           </div>
           <p class="font-semibold text-[18px] text-gray-background-8">
-            Checkout
+            {{ showSuccess ? "Successfull" : "Checkout" }}
           </p>
         </div>
-        <div
-          @click="showLeaveCheckout = true"
-          class="flex cursor-pointer items-center border border-[#E2E8F0] justify-center h-[36px] w-[36px] rounded-full"
-        >
-          <IconsClose />
+        <div>
+          <div
+            v-if="!showSuccess"
+            @click="showLeaveCheckout = true"
+            class="flex cursor-pointer items-center border border-[#E2E8F0] justify-center h-[36px] w-[36px] rounded-full"
+          >
+            <IconsClose />
+          </div>
+          <div
+            v-if="showSuccess"
+            @click="emit('close')"
+            class="flex cursor-pointer items-center border border-[#E2E8F0] justify-center h-[36px] w-[36px] rounded-full"
+          >
+            <IconsClose />
+          </div>
         </div>
+      </div>
+      <div v-if="showSuccess" class="flex-grow h-full">
+        <CheckoutSuccess />
       </div>
 
       <div v-if="showLeaveCheckout" class="flex-grow h-full">
@@ -33,7 +47,7 @@
       </div>
 
       <div
-        v-if="!showLeaveCheckout"
+        v-if="!showLeaveCheckout && !showSuccess"
         class="flex flex-col px-2 lg:px-[24px] h-full lg:h-auto justify-between lg:justify-normal lg:flex-row"
       >
         <div
@@ -73,7 +87,7 @@
             <div
               class="h-[86px] card-shadow border border-[#E2E8F0] flex gap-[16px] items-center w-full px-2 lg:px-[16px] py-[12px] rounded-[12px]"
             >
-              <div class="w-[86px] h-[62px] bg-red-400 rounded-[8px]">
+              <div class="w-[86px] h-[62px] rounded-[8px]">
                 <img
                   :src="event.imageUrl"
                   alt="event-image"
@@ -181,12 +195,13 @@
               >
             </p>
             <div class="flex items-center gap-[8px]">
-              <input type="checkbox" />
+              <input type="checkbox" v-model="keep" />
               <p class="text-[14px] lg:mt-4 text-[#64748B]">
                 Keep me updated on top online and offline events.
               </p>
             </div>
           </div>
+       
           <CommonButton
             :class="[
               !ticketStore.name && !ticketStore.email && step === 'Contact'
@@ -196,6 +211,7 @@
             ]"
             :label="step === 'Contact' ? 'CHECKOUT' : 'CONTINUE'"
             @click="nextStep"
+            :disabled="step === 'Ticket' && ticketStore.ticketAmount === 0 || step === 'Contact' && (!ticketStore.name || !ticketStore.email || !keep || !ticketStore.payStack )"
           />
         </div>
       </div>
@@ -204,7 +220,7 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useFirestore, useCollection } from "vuefire";
 import { collection, query, where } from "firebase/firestore";
 import IconsTicket from "@/components/icons/Tickets.vue";
@@ -212,20 +228,57 @@ import IconsContact from "@/components/icons/Contact.vue";
 import IconsCard from "@/components/icons/Card.vue";
 import IconsActiveIcon from "../icons/ActiveIcon.vue";
 import { formatDate, formatTime } from "@/utils/helpers";
+// import {payWithPaystack} from '@/services/paystack'
+import { setData } from "@/utils/helpers";
 
 const step = ref("Ticket");
+const keep = ref(false)
 const route = useRoute();
+const router = useRouter();
 const db = useFirestore();
 const ticketStore = useTicketStore();
 
 const showLeaveCheckout = ref(false);
+const showSuccess = ref(false);
 
 function nextStep() {
   if (step.value === "Ticket") {
     step.value = "Contact";
+  }else if (step.value === 'Contact'){
+    pay()
   }
 }
+const ticket = computed(() => ({
+  id: ticketStore.ticket?.id ?? "",
+  available: ticketStore.ticket?.available ?? 0,
+}));
 
+const pay = () => {
+  if (
+    !ticket.value.id ||
+    !ticketStore.email ||
+    !props.event?.id ||
+    !ticketStore.ticketAmount
+  ) {
+    console.error(" Missing required data", {
+      ticket: ticket.value,
+      email: ticketStore.email,
+      event: props.event,
+      ticketAmount: ticketStore.ticketAmount,
+    });
+    return;
+  }
+
+  payWithPaystack({
+    email: ticketStore.email,
+    amount: ticketStore.Total,
+    ticket: ticket.value,
+    ticketCount: ticketStore.ticketAmount,
+    event: props.event,
+    name: ticketStore.name,
+    router,
+  });
+};
 function previousStep() {
   if (step.value === "Contact") {
     step.value = "Ticket";
@@ -272,6 +325,28 @@ function handleFocus(ticketId) {
 function handleBlur() {
   isEditing.value = false;
   currentlyEditingId.value = null;
+}
+
+function payWithPaystack({ email, amount, ticket, ticketCount, event, name }) {
+  const config = useRuntimeConfig();
+  const publicKey = config.public.PAYSTACK_PUBLIC_KEY;
+  const handler = window.PaystackPop.setup({
+    key: publicKey,
+    email,
+    amount: amount * 100,
+    currency: "NGN",
+    callback: function (response) {
+      console.log("Payment successful:");
+      setData(ticket, email, amount, ticketCount, event, name, response);
+      showSuccess.value = true;
+      ticketStore.resetStore()
+    },
+    onClose: function () {
+      console.log("Payment popup closed");
+    },
+  });
+
+  handler.openIframe();
 }
 </script>
 

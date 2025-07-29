@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-black-highest">
+  <div class="bg-white  dark:bg-black-highest">
     <EventsDetailsHeroSection :eventData="eventData" />
     <div class="lg:px-[142px] pb-[100px]">
       <div
@@ -57,7 +57,7 @@
           </div>
 
           <div class="flex flex-col gap-[16px]">
-            <p>Scan or share this QR code to view event:</p>
+            <p class="text-[16px] font-medium text-[#1E293B] dark:text-[#CED4DA]">Scan or share this QR code to view event:</p>
             <Qrcode
               :value="eventUrl"
               variant="pixelated"
@@ -67,7 +67,7 @@
               :background="qrColors.background"
             />
             <div
-              @click="toggleeventUrl"
+              @click="copy"
               class="rounded-[8px] bg-[#F1F5F9] px-[12px] py-[8px] flex gap-[8px] cursor-pointer items-center w-[150px]"
             >
               <IconsLightning />
@@ -75,12 +75,7 @@
                 >Share Event Link</span
               >
             </div>
-            <p
-              v-if="showEventUrl"
-              class="text-gray-background-7 dark:text-white text-[18px]"
-            >
-              {{ eventUrl }}
-            </p>
+           
           </div>
         </div>
         <div class="">
@@ -105,10 +100,10 @@ import { useDocument } from "vuefire";
 import { useFirestore } from "vuefire";
 import { doc } from "firebase/firestore";
 import { formatDate, formatTime } from "@/utils/helpers";
+import useClipboard from 'vue-clipboard3'
 
 const route = useRoute();
 const db = useFirestore();
-const showEventUrl = ref(false);
 const showCheckout = ref(false);
 const ticketStore = useTicketStore();
 const colorMode = useColorMode();
@@ -125,6 +120,8 @@ const toggleeventUrl = () => {
   showEventUrl.value = !showEventUrl.value;
 };
 
+    const { toClipboard } = useClipboard()
+
 const eventUrl = computed(() => {
   const baseUrl = "https://onetix.com/event"; // Replace with your actual base URL
   return `${baseUrl}/${route.params.id}`;
@@ -136,6 +133,17 @@ const qrColors = computed(() => {
     background: "transparent", // Optional: to match the page background
   };
 });
+
+
+//copy link to clipboard
+    const copy = async () => {
+      try {
+            const url = eventUrl.value
+        await toClipboard(url)
+      } catch (e) {
+        console.error(e)
+      }
+    }
 </script>
 
 <style scoped></style>

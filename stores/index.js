@@ -5,13 +5,14 @@ export const useTicketStore = defineStore("ticket", {
   state: () => ({
     ticket: {},
     ticketAmount: 0,
-    oneTixFee: 5000,
+    oneTixFee: 2000,
     subTotal: 0,
     Total: 0,
     name: "",
     firstName: "",
     lastName: "",
     email: "",
+    payStack:null
   }),
 
   actions: {
@@ -26,6 +27,11 @@ export const useTicketStore = defineStore("ticket", {
       this.ticket = ticket;
       this.calculateTotal();
     },
+     setPaystack(value) {
+      this.payStack = value
+   
+    },
+
 
     setTicketAmount(amount) {
       this.ticketAmount = amount;
@@ -41,6 +47,7 @@ export const useTicketStore = defineStore("ticket", {
         (this.email = ""),
         (this.firstName = ""),
         (this.name = ""));
+        this.payStack = ''
     },
     setUserDetails(name, email, firstName, lastName) {
       this.name = name;

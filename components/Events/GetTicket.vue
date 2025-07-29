@@ -1,19 +1,19 @@
 <template>
   <div
-    class="px-[24px] flex py-[20px] xl:flex flex-col bg-white rounded-[12px] border-[1px] border-[#E2E8F0] gap-[14px]"
+    class="px-[24px] fixed z-999 lg:z-0  lg:relative bottom-2 left-0 w-full flex py-[20px] xl:flex flex-col bg-white rounded-[12px] border-[1px] border-[#E2E8F0] gap-[14px]"
   >
-    <p class="font-medium px-2 text-[16px] text-gray-background-8">
+    <p class="font-medium px-2 hidden lg:flex text-[16px] text-gray-background-8">
       {{ eventData.title }}
     </p>
     <p
       v-if="eventData.price > 0"
-      class="text-secondary-5 px-2 text-[16px] font-regular"
+      class="text-secondary-5 px-2 hidden lg:flex text-[16px] font-regular"
     >
       From {{ formatCurrency(eventData.price) }}
     </p>
     <p
       v-if="eventData.isFree"
-      class="text-secondary-5 px-2 text-[16px] font-regular"
+      class="text-secondary-5 hidden lg:flex px-2 text-[16px] font-regular"
     >
       Free
     </p>

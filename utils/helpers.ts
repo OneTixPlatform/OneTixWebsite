@@ -1,5 +1,13 @@
 // utils/dateFormatter.js or plugins/dayjs.ts
 import dayjs from "dayjs";
+import {
+  doc,
+  writeBatch,
+  serverTimestamp,
+  increment,
+  collection,
+} from "firebase/firestore";
+import { useFirestore } from "vuefire";
 
 // Format: 26th July, 2024
 export function formatDate(timestamp: {
@@ -26,4 +34,66 @@ export function formatCurrency(amount: number) {
     currency: "NGN",
     minimumFractionDigits: 0,
   }).format(amount);
+}
+
+// setdata
+export async function setData(
+  ticket: { id: string; available: number },
+  email: string,
+  amount: number,
+  ticketCount: number,
+  event: { id: string },
+  name: string,
+  response: { reference: string; transaction: string; receipt_url?: string },
+  mode: "paystack" | "cash" = "paystack",
+  router: ReturnType<typeof useRouter>,
+) {
+  const db = useFirestore();
+  const batch = writeBatch(db);
+
+  // Generate document references with auto-IDs
+  const purchaseRef = doc(collection(db, "purchases"));
+  const ticketRef = doc(collection(db, "tickets"));
+  const ticketTypeRef = doc(db, "ticketTypes", ticket.id);
+
+  // Add purchase document
+  batch.set(purchaseRef, {
+    eventId: event.id,
+    ticketTypeId: ticket.id,
+    buyerName: name,
+    buyerEmail: email,
+    ticketCount,
+    amount,
+    transactionId: response.transaction,
+    mode,
+    paymentRef: response.reference,
+    receiptUrl: response.receipt_url ?? null,
+    createdAt: serverTimestamp(),
+  });
+
+  // Add ticket document
+  batch.set(ticketRef, {
+    eventId: event.id,
+    ticketTypeId: ticket.id,
+    purchaseId: purchaseRef.id,
+    buyerName: name,
+    buyerEmail: email,
+    isUsed: false,
+    usedAt: null,
+    count: ticketCount,
+    createdAt: serverTimestamp(),
+  });
+
+  // Update ticket type available count
+  batch.update(ticketTypeRef, {
+    available: increment(-ticketCount),
+  });
+
+  try {
+    await batch.commit();
+    console.log("✅ Firebase batch committed successfully.");
+  } catch (error) {
+    console.error("❌ Error committing batch:", error);
+    throw error;
+  }
 }

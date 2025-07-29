@@ -26,7 +26,7 @@
         v-if="isLoading"
         class="flex gap-[20px] lg:grid lg:grid-cols-4 2xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
       >
-    <!-- loader -->
+        <!-- loader -->
         <div
           v-for="(loader, index) in 4"
           :key="index"
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div
-      v-else
+        v-else
         class="flex gap-4 lg:grid lg:grid-cols-4 2xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
       >
         <DiscoverEventCard
@@ -58,9 +58,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
-import { useFirestore } from 'vuefire';
+import { ref, onMounted } from "vue";
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { useFirestore } from "vuefire";
 
 const db = useFirestore();
 const events = ref([]);
@@ -71,18 +71,18 @@ async function fetchEvents() {
 
   try {
     const eventsQuery = query(
-      collection(db, 'events'),
-      orderBy('eventDate', 'asc'),
-      limit(10)
+      collection(db, "events"),
+      orderBy("eventDate", "asc"),
+      limit(10),
     );
 
     const snapshot = await getDocs(eventsQuery);
-    events.value = snapshot.docs.map(doc => ({
+    events.value = snapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
   } catch (error) {
-    console.error('Error fetching events:', error);
+    console.error("Error fetching events:", error);
   } finally {
     isLoading.value = false; // ✅ always stop loading even if no data
   }
@@ -91,10 +91,6 @@ async function fetchEvents() {
 onMounted(() => {
   fetchEvents();
 });
-
 </script>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>

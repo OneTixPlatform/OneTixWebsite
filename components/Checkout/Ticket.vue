@@ -12,14 +12,14 @@
       <div class="flex gap-2 items-center">
         <p
           :class="[
-            ticket.available === 0 ? 'text-secondary-3' : 'text-primary-5',
+            ticket.available <= 0 ? 'text-secondary-3' : 'text-primary-5',
             ' text-[15px] font-semibold',
           ]"
         >
           {{ formatCurrency(ticket.price) }}
         </p>
         <div
-          v-if="ticket.available === 0"
+          v-if="ticket.available <= 0"
           class="h-[16px] rounded-[16px] bg-[#FFFBEB] flex px-[8px] py-[2px] items-center justify-center"
         >
           <span class="text-[12px] text-[#F59E0B] font-medium">Sold out</span>
@@ -28,7 +28,7 @@
 
       <p
         :class="[
-          ticket.available === 0 ? 'text-[#CBD5E1]' : 'text-[#64748B]',
+          ticket.available <= 0 ? 'text-[#CBD5E1]' : 'text-[#64748B]',
           ' text-[14px] max-w-[429px] w-full',
         ]"
       >
@@ -73,6 +73,7 @@ function handleAmountChange(newAmount) {
 
   if (parsedAmount > 0) {
     ticketStore.setTicket(props.ticket);
+
     ticketStore.setTicketAmount(parsedAmount);
   } else {
     localAmount.value = 0;
