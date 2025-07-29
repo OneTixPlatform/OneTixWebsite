@@ -15,6 +15,18 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.css", "remixicon/fonts/remixicon.css"],
+   mazUi: {
+    injectComponents: true,
+    injectCss: true,
+    injectAos: {
+      injectCss: true,
+    },
+    injectUseToast: {
+      position: "top-right",
+    },
+    injectUseThemeHandler: true,
+    devtools: true,
+  },
   modules: [
     [
       "@pinia/nuxt",
