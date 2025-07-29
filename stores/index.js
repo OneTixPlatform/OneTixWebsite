@@ -8,6 +8,10 @@ export const useTicketStore = defineStore("ticket", {
     oneTixFee: 5000,
     subTotal: 0,
     Total: 0,
+    name: "",
+    firstName: "",
+    lastName: "",
+    email: "",
   }),
 
   actions: {
@@ -33,6 +37,15 @@ export const useTicketStore = defineStore("ticket", {
       this.ticketAmount = 0;
       this.subTotal = 0;
       this.Total = 0;
+      ((this.lastName = ""),
+        (this.email = ""),
+        (this.firstName = ""),
+        (this.name = ""));
+    },
+    setUserDetails(name, email, firstName, lastName) {
+      this.name = name;
+      this.email = email;
+      ((this.firstName = firstName), (this.lastName = lastName));
     },
   },
 

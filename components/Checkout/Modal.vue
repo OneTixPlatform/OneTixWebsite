@@ -1,7 +1,7 @@
 <template>
-  <div class="modal-overlay px-4">
+  <div class="modal-overlay h-screen lg:px-4">
     <!-- modal -->
-    <div class="modal-content lg:h-[600px] rounded-[16px]">
+    <div class="modal-content h-full w-full lg:h-[600px] lg:rounded-[16px]">
       <!-- Top -->
       <div
         class="rounded-t-[16px] flex justify-between items-center py-[16px] px-[24px] border-b border-[#E2E8F0] w-full"
@@ -25,9 +25,8 @@
         </div>
       </div>
 
-      <div>
+      <div v-if="showLeaveCheckout" class="flex-grow h-full">
         <CheckoutLeaveCheckout
-          v-if="showLeaveCheckout"
           @close="emit('close')"
           @stay="showLeaveCheckout = false"
         />
@@ -35,10 +34,10 @@
 
       <div
         v-if="!showLeaveCheckout"
-        class="flex flex-col px-[24px] lg:flex-row"
+        class="flex flex-col px-2 lg:px-[24px] h-full lg:h-auto justify-between lg:justify-normal lg:flex-row"
       >
         <div
-          class="lg:w-[632px] w-full lg:border-r py-[16px] px-[24px] h-[728px] lg:border-[#e2e8f0]"
+          class="lg:w-[632px] w-full lg:border-r py-[16px] px-2 lg:px-[24px] lg:h-[728px] lg:border-[#e2e8f0]"
         >
           <div
             class="flex items-center justify-center lg:justify-start gap-[8px]"
@@ -66,13 +65,13 @@
               </p>
               <div
                 v-if="index !== steps.length - 1"
-                class="h-[3px] w-[48px] rounded-[50px] bg-[#E2E8F0]"
+                class="h-[3px] w-[22px] lg:w-[48px] rounded-[50px] bg-[#E2E8F0]"
               ></div>
             </div>
           </div>
           <div class="flex-col mt-[24px] gap-[16px] flex">
             <div
-              class="h-[86px] card-shadow border border-[#E2E8F0] flex gap-[16px] items-center w-full px-[16px] py-[12px] rounded-[12px]"
+              class="h-[86px] card-shadow border border-[#E2E8F0] flex gap-[16px] items-center w-full px-2 lg:px-[16px] py-[12px] rounded-[12px]"
             >
               <div class="w-[86px] h-[62px] bg-red-400 rounded-[8px]">
                 <img
@@ -92,11 +91,9 @@
                     class="flex items-center gap-[8px] text-gray-background-8"
                   >
                     <div
-                      class="h-[8px] w-[8px] rounded-full bg-[#64748B] dark:bg-[#CED4DA]"
+                      class="h-[8px] w-[8px] rounded-full bg-[#64748B]"
                     ></div>
-                    <span
-                      class="text-[14px] leading-[18px] dark:text-[#EFF2F4]"
-                    >
+                    <span class="text-[14px] leading-[18px]">
                       {{ formatTime(event.eventDate) }}
                     </span>
                   </div>
@@ -106,18 +103,22 @@
 
             <div v-if="step === 'Ticket'">
               <CheckoutTicket
-                v-for="(ticket, index) in ticketTypes"
-                :key="index"
+                v-for="ticket in ticketTypes"
+                :key="ticket.id"
                 :ticket="ticket"
+                :is-editing="isEditing"
+                :currently-editing-id="currentlyEditingId"
+                @focus="handleFocus"
+                @blur="handleBlur"
               />
             </div>
             <CheckoutContact v-if="step === 'Contact'" />
-            <CheckoutPayment v-if="step === 'Payment'" />
+            <!-- <CheckoutPayment v-if="step === 'Payment'" /> -->
           </div>
         </div>
 
         <div
-          class="py-[16px] flex flex-col gap-[24px] items-center flex-grow px-[24px]"
+          class="py-[16px] mt-[16px] lg:mt-0 lg:w-[400px] flex flex-col gap-[24px] items-center lg:flex-grow px-2 lg:px-[24px]"
         >
           <p>Summary</p>
 
@@ -159,10 +160,33 @@
               <span>₦{{ ticketStore.Total }}</span>
             </div>
           </div>
-
+          <div
+            v-if="
+              ticketStore.email && ticketStore.name && ticketStore.ticket.name
+            "
+            class="flex flex-col gap-[24px] items-start w-full"
+          >
+            <p class="text-[15px] text-gray-background-7">
+              By clicking checkout, you agree to the
+              <span class="text-secondary-5 underline"
+                >OneTix Terms of Service</span
+              >
+            </p>
+            <div class="flex items-center gap-[8px]">
+              <input type="checkbox" />
+              <p class="text-[14px] lg:mt-4 text-[#64748B]">
+                Keep me updated on top online and offline events.
+              </p>
+            </div>
+          </div>
           <CommonButton
-            class="w-full !h-[48px] text-white bg-primary-5"
-            label="CONTINUE"
+            :class="[
+              !ticketStore.name && !ticketStore.email && step === 'Contact'
+                ? 'opacity-20'
+                : '',
+              'w-full !h-[48px] text-white bg-primary-5',
+            ]"
+            :label="step === 'Contact' ? 'CHECKOUT' : 'CONTINUE'"
             @click="nextStep"
           />
         </div>
@@ -191,18 +215,16 @@ const showLeaveCheckout = ref(false);
 function nextStep() {
   if (step.value === "Ticket") {
     step.value = "Contact";
-  } else if (step.value === "Contact") {
-    step.value = "Payment";
   }
 }
 
 function previousStep() {
-  if (step.value === "Payment") {
-    step.value = "Contact";
-  } else if (step.value === "Contact") {
+  if (step.value === "Contact") {
     step.value = "Ticket";
   }
 }
+const isEditing = ref(false);
+const currentlyEditingId = ref(null);
 
 const eventId = route.params.id;
 
@@ -233,6 +255,16 @@ const steps = [
     activeIcon: IconsActiveIcon,
   },
 ];
+
+function handleFocus(ticketId) {
+  isEditing.value = true;
+  currentlyEditingId.value = ticketId;
+}
+
+function handleBlur() {
+  isEditing.value = false;
+  currentlyEditingId.value = null;
+}
 </script>
 
 <style scoped>
@@ -253,7 +285,7 @@ const steps = [
   position: relative;
   display: flex;
   flex-direction: column;
-  /* height: 360px; */
+
   overflow-y: scroll;
   background-color: #fff;
 

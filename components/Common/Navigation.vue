@@ -24,7 +24,7 @@
       </NuxtLink>
 
       <!-- routes -->
-      <div class="hidden cursor-pointer xl:flex">
+      <div class="hidden cursor-pointer lg:flex">
         <ul class="flex gap-[32px]">
           <li
             v-for="(link, index) in links"
@@ -48,18 +48,23 @@
       <!-- login -->
       <div class="flex items-center cursor-pointer">
         <span
-          class="px-[24px] text-gray-background-8 dark:text-white hidden xl:flex py-[8px] font-semibold text-[16px]"
+          class="px-[24px] text-gray-background-8 dark:text-white hidden lg:flex py-[8px] font-semibold text-[16px]"
           >Login</span
         >
         <button
-          class="bg-primary-5 hidden xl:flex h-[48px] items-center justify-center rounded-[50px] text-white px-[16px] py-[8px]"
+          class="bg-primary-5 hidden lg:flex h-[48px] items-center justify-center rounded-[50px] text-white px-[16px] py-[8px]"
         >
           Get started
         </button>
-        <IconsHamburger v-if="!isDark" class="flex xl:hidden cursor-pointer" />
+        <IconsHamburger
+          @click="emit('showMobileNav')"
+          v-if="!isDark"
+          class="flex lg:hidden cursor-pointer"
+        />
         <IconsHamburgerLight
+          @click="emit('showMobileNav')"
           v-if="isDark"
-          class="flex xl:hidden cursor-pointer"
+          class="flex lg:hidden cursor-pointer"
         />
         <div class="px-[12px] py-[7px]">
           <ClientOnly>
@@ -81,6 +86,7 @@ const route = useRoute();
 
 const isScrolled = ref(false);
 
+const emit = defineEmits(["showMobileNav"]);
 //Define helper functions
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 10;
