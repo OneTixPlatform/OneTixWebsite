@@ -101,6 +101,14 @@
               </div>
             </div>
 
+            <div v-if="ticketTypes.length === 0" class="flex flex-col gap-2">
+              <div
+                v-for="(loader, index) in 3"
+                :key="index"
+                class="h-[80px] rounded-md w-full skeleton"
+              ></div>
+            </div>
+
             <div v-if="step === 'Ticket'">
               <CheckoutTicket
                 v-for="ticket in ticketTypes"

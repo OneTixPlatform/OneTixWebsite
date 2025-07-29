@@ -81,6 +81,45 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* Skeleton Loader Styles */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(238, 238, 238, 0),
+    rgba(137, 135, 135, 0.3),
+    rgba(235, 235, 235, 0)
+  );
+  background-size: 200%;
+  animation: skeleton 2.5s ease-in-out infinite;
+  -webkit-animation: skeleton 2.5s ease-in-out infinite;
+  @apply dark:bg-gray-700
+}
+
+.skeleton.card {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.skeleton.card.inline {
+  display: inline-block;
+  margin: 0 3px;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: 0% 10%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
 /* overflow tests */
 /* * {
   outline: 1px solid red !important;

@@ -23,6 +23,22 @@
     <!-- overflowCard -->
     <div class="overflow-x-auto no-scrollbar mt-[48px] mb-[48px] w-full">
       <div
+        v-if="isLoading"
+        class="flex gap-[20px] lg:grid lg:grid-cols-4 2xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
+      >
+    <!-- loader -->
+        <div
+          v-for="(loader, index) in 4"
+          :key="index"
+          class="flex w-[300px] flex-col gap-4"
+        >
+          <div class="h-[147px] w-full skeleton rounded-[16px]"></div>
+          <p class="w-[100px] h-[23px] rounded-[16px] skeleton"></p>
+          <p class="w-full h-[40px] rounded-[16px] skeleton"></p>
+        </div>
+      </div>
+      <div
+      v-else
         class="flex gap-4 lg:grid lg:grid-cols-4 2xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
       >
         <DiscoverEventCard
@@ -42,24 +58,43 @@
 </template>
 
 <script setup>
-import { useCollection } from "vuefire";
-import { collection, query, orderBy, limit } from "firebase/firestore";
-import { useFirestore } from "vuefire";
+import { ref, onMounted } from 'vue';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { useFirestore } from 'vuefire';
 
 const db = useFirestore();
+const events = ref([]);
+const isLoading = ref(true);
 
-const eventsQuery = query(
-  collection(db, "events"),
-  orderBy("eventDate", "asc"),
-  limit(10),
-);
-const events = useCollection(eventsQuery);
+async function fetchEvents() {
+  isLoading.value = true;
 
-const cities = [
-  { name: "Lagos", value: "lagos" },
-  { name: "Abuja", value: "abuja" },
-  { name: "Port Harcourt", value: "portharcourt" },
-];
+  try {
+    const eventsQuery = query(
+      collection(db, 'events'),
+      orderBy('eventDate', 'asc'),
+      limit(10)
+    );
+
+    const snapshot = await getDocs(eventsQuery);
+    events.value = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+  } catch (error) {
+    console.error('Error fetching events:', error);
+  } finally {
+    isLoading.value = false; // ✅ always stop loading even if no data
+  }
+}
+
+onMounted(() => {
+  fetchEvents();
+});
+
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
