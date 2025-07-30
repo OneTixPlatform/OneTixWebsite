@@ -85,8 +85,8 @@ const links = [
   { name: "Discover events", path: "/" },
 
   { name: "Pricing", path: "/how" },
-  { name: "About us", path: "/contact" },
-  { name: "Contact us", path: "/contact" },
+  { name: "About us", path: "/" },
+  { name: "Contact us", path: "/" },
 ];
 
 const colorMode = useColorMode();

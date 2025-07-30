@@ -104,8 +104,8 @@ onUnmounted(() => {
 const links = [
   { name: "Discover events", path: "/" },
   { name: "How Onetix works", path: "/How" },
-  { name: "Pricing", path: "/contact" },
-  { name: "About us", path: "/contact" },
+  { name: "Pricing", path: "/" },
+  { name: "About us", path: "/" },
 ];
 
 const colorMode = useColorMode();
