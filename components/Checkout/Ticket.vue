@@ -78,11 +78,13 @@ const isDisabled = computed(() => {
 });
 
 const dropdownItems = computed(() => {
-  return Array.from({ length: props.ticket.available + 1 }, (_, i) => ({
+  const maxSelectable = Math.min(10, props.ticket.available);
+  return Array.from({ length: maxSelectable + 1 }, (_, i) => ({
     label: i === 0 ? "0 (Clear)" : `${i}`,
     action: () => handleAmountChange(i),
   }));
 });
+
 
 function handleAmountChange(amount) {
   selectedAmount.value = amount; // 🆕 update local label
