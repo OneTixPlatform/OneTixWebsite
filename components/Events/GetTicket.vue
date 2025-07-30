@@ -1,8 +1,10 @@
 <template>
   <div
-    class="px-[24px] fixed z-999 lg:z-0  lg:relative bottom-2 left-0 w-full flex py-[20px] xl:flex flex-col bg-white rounded-[12px] border-[1px] border-[#E2E8F0] gap-[14px]"
+    class="px-[24px] fixed z-999 lg:z-0 lg:relative bottom-2 left-0 w-full flex py-[20px] xl:flex flex-col bg-white rounded-[12px] border-[1px] border-[#E2E8F0] gap-[14px]"
   >
-    <p class="font-medium px-2 hidden lg:flex text-[16px] text-gray-background-8">
+    <p
+      class="font-medium px-2 hidden lg:flex text-[16px] text-gray-background-8"
+    >
       {{ eventData.title }}
     </p>
     <p

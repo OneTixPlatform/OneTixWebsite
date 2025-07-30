@@ -12,7 +12,8 @@ export const useTicketStore = defineStore("ticket", {
     firstName: "",
     lastName: "",
     email: "",
-    payStack:null
+    payStack: null,
+    currentUserTicket: "",
   }),
 
   actions: {
@@ -27,11 +28,9 @@ export const useTicketStore = defineStore("ticket", {
       this.ticket = ticket;
       this.calculateTotal();
     },
-     setPaystack(value) {
-      this.payStack = value
-   
+    setPaystack(value) {
+      this.payStack = value;
     },
-
 
     setTicketAmount(amount) {
       this.ticketAmount = amount;
@@ -47,14 +46,17 @@ export const useTicketStore = defineStore("ticket", {
         (this.email = ""),
         (this.firstName = ""),
         (this.name = ""));
-        this.payStack = ''
+      this.payStack = "";
+      this.currentUserTicket = ""
     },
     setUserDetails(name, email, firstName, lastName) {
       this.name = name;
       this.email = email;
       ((this.firstName = firstName), (this.lastName = lastName));
     },
+    setTicketId(ticket) {
+      this.currentUserTicket = ticket;
+    },
   },
-
   persist: true,
 });
