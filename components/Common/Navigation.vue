@@ -12,7 +12,7 @@
     >
       <!-- logo -->
       <NuxtLink :to="'/'">
-        <div class="w-[140px] h-[48px]">
+        <div class="lg:w-[140px] lg:h-[48px] w-[120px] h-[38px]">
           <ClientOnly>
             <img
               :src="isDark ? oneTixWhite : oneTix"
