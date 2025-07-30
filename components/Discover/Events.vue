@@ -5,7 +5,7 @@
         <IconsLocation />
         <MazDropdown>
           <span
-            class="font-medium text-[16px] dark:text-[#EFF2F4] text-gray-background-7"
+            class="font-medium text-[14px] sm:text-[16px] dark:text-[#EFF2F4] text-gray-background-7"
             >Lagos</span
           >
         </MazDropdown>
@@ -14,7 +14,7 @@
         <IconsCalendar />
         <MazDropdown>
           <span
-            class="font-medium text-[16px] dark:text-[#EFF2F4] text-gray-background-7"
+            class="font-medium text-[14px] sm:text-[16px] dark:text-[#EFF2F4] text-gray-background-7"
             >Date</span
           >
         </MazDropdown>
