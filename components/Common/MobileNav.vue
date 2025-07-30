@@ -6,7 +6,7 @@
       class="py-[16px] flex justify-between w-full h-[80px] items-center px-[20px]"
     >
       <NuxtLink :to="'/'">
-        <div class="w-[140px] h-[48px]">
+        <div class="lg:w-[140px] lg:h-[48px] w-[120px] h-[38px]">
           <ClientOnly>
             <img
               :src="isDark ? oneTixWhite : oneTix"

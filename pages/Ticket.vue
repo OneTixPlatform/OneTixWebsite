@@ -2,48 +2,64 @@
   <div
     class="w-full flex flex-col lg:flex-row items-center lg:items-start pt-[48px] pb-[119px] gap-[146px] lg:px-[142px] px-4 bg-[#F8FAFC]"
   >
-    <!-- Hidden printable ticket -->
-    <div
-      v-if="ticketEvent"
-      id="ticket-pdf-content"
-      class="flex py-12 flex-col px-12"
-      style="
-        position: absolute;
-        left: -9999px;
-        top: 0;
-        width: 100%;
-        height: 100%;
-      "
-    >
-      <div class="mb-4">
-        <img :src="oneTix" alt="one-tix logo" class="h-[20px]" />
-      </div>
-
-      <div v-if="ticketEvent" class="mb-4">
-        <h2 class="text-2xl font-bold">{{ ticketEvent.title }}</h2>
-        <p><strong>Date:</strong> {{ formatDate(ticketEvent.eventDate) }}</p>
-        <p><strong>Time:</strong> {{ formatTime(ticketEvent.eventDate) }}</p>
-        <p><strong>Location:</strong> {{ ticketEvent.location }}</p>
-      </div>
-
-      <div class="mb-4 text-2xl">
-        <p><strong>Name:</strong> {{ userTicket.buyerName }}</p>
-        <p><strong>Tickets:</strong> {{ userTicket.count }}</p>
-      </div>
-
-      <!-- QR Code image for PDF -->
-
-  <div style="width: 300px; height: 300px;">
-   <Qrcode
-  :value="ticketStore.currentUserTicket"
-  :size="500"
-  variant="pixelated"
-  :foreground="qrColors.foreground"
-  :background="qrColors.background"
-/>
+<div
+  v-if="ticketEvent"
+  id="ticket-pdf-content"
+  class="flex flex-col items-center text-center gap-10"
+  style="
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    width: 800px;
+    padding: 80px 40px;
+    background: white;
+    font-family: 'Arial', sans-serif;
+  "
+>
+  <!-- Logo -->
+  <div>
+    <img :src="oneTix" alt="one-tix logo" style="height: 120px;" />
   </div>
 
-    </div>
+  <!-- Event Info -->
+  <div style="max-width: 600px;">
+    <h2 style="font-size: 38px; font-weight: 700; margin-bottom: 20px;">
+      {{ ticketEvent.title }}
+    </h2>
+    <p style="font-size: 22px; margin-bottom: 10px;">
+      <strong>Date:</strong> {{ formatDate(ticketEvent.eventDate) }}
+    </p>
+    <p style="font-size: 22px; margin-bottom: 10px;">
+      <strong>Time:</strong> {{ formatTime(ticketEvent.eventDate) }}
+    </p>
+    <p style="font-size: 22px;">
+      <strong>Location:</strong> {{ ticketEvent.location }}
+    </p>
+  </div>
+
+  <!-- Buyer Info -->
+  <div style="max-width: 600px; font-size: 24px;">
+    <p style="margin-bottom: 10px;">
+      <strong>Name:</strong> {{ userTicket.buyerName }}
+    </p>
+    <p>
+      <strong>Tickets:</strong> {{ userTicket.count }}
+    </p>
+  </div>
+
+  <!-- QR Code -->
+  <div style="margin-top: 30px; width: 420px; height: 420px;">
+    <Qrcode
+      :value="ticketStore.currentUserTicket"
+      :size="700"
+      variant="pixelated"
+      :foreground="qrColors.foreground"
+      :background="qrColors.background"
+    />
+  </div>
+</div>
+
+
     <div
       v-if="userTicket && ticketEvent"
       class="bg-white shadow-[0px_4px_10px_#00000014] relative lg:h-[715px] border border-[#E2E8F0] py-[14px] rounded-[24px] px-[12px] max-w-[470px] w-full"
