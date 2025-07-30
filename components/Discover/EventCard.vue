@@ -23,12 +23,12 @@
       </div>
       <div class="mt-[12px] flex flex-col gap-[6px]">
         <p
-          class="font-medium text-[14px] sm:text-[18px] hover:underline text-gray-background-8 leading-[23px] dark:text-[#EFF2F4]"
+          class="font-medium text-[15px] sm:text-[18px] hover:underline text-gray-background-8 leading-[23px] dark:text-[#EFF2F4]"
         >
           {{ eventData.title }}
         </p>
 
-        <p class="text-[#64748B] clamp-3 text-12px sm:text-[14px] dark:text-[#CED4DA]">
+        <p class="text-[#64748B] clamp-3 text-[12px] sm:text-[14px] dark:text-[#CED4DA]">
           {{ eventData.description }}
         </p>
         <div class="flex items-center gap-[8px]">
