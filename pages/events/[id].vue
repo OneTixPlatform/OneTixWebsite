@@ -100,7 +100,7 @@ import { useDocument } from "vuefire";
 import { useFirestore } from "vuefire";
 import { doc } from "firebase/firestore";
 import { formatDate, formatTime } from "@/utils/helpers";
-import useClipboard from 'vue-clipboard3'
+
 
 
 const toast = useToast()
@@ -112,17 +112,16 @@ const colorMode = useColorMode();
 
 const eventRef = doc(db, "events", route.params.id);
 const eventData = useDocument(eventRef);
+onMounted(()=>{
+  console.log(eventData)
+})
 
 const clearCheckout = () => {
   showCheckout.value = false;
   ticketStore.resetStore();
 };
 
-const toggleeventUrl = () => {
-  showEventUrl.value = !showEventUrl.value;
-};
 
-    const { toClipboard } = useClipboard()
 
 const eventUrl = computed(() => {
   const baseUrl = "https://onetix.com/event"; // Replace with your actual base URL
@@ -137,17 +136,14 @@ const qrColors = computed(() => {
 });
 
 
-//copy link to clipboard
-    const copy = async () => {
-      try {
-            const url = eventUrl.value
-        await toClipboard(url)
-        toast.message("Link Copied to clipboard")
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
+const copy = async () => {
+  try {
+    await navigator.clipboard.writeText(eventUrl.value);
+    toast.message("Link Copied to clipboard");
+  } catch (err) {
+    console.error("Copy failed", err);
+  }
+};
     
 </script>
 
