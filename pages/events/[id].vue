@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white  dark:bg-black-highest">
+  <div class="bg-white dark:bg-black-highest">
     <EventsDetailsHeroSection :eventData="eventData" />
-    <div class="lg:px-[142px] pb-[100px]">
+    <div v-if="eventData" class="lg:px-[142px] pb-[100px]">
       <div
         class="flex flex-col py-[56px] lg:flex-row lg:border-b-[1px] lg:border-b-[#CBD5E1] px-4 gap-[45px] 2xl:mx-auto"
       >
@@ -10,7 +10,7 @@
             <div class="flex gap-2 py-[12px] items-center">
               <IconsCalendar />
               <p class="text-gray-background-8 dark:text-[#CED4DA] text-[16px]">
-                {{ formatDate(eventData.eventDate) }}
+                {{ formatDate(eventData?.eventDate) }}
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
@@ -18,7 +18,7 @@
               <p
                 class="text-gray-background-8 dark:text-[#CED4DA] w-full text-[16px]"
               >
-                {{ formatTime(eventData.eventDate) }}
+                {{ formatTime(eventData?.eventDate) }}
               </p>
             </div>
             <div class="flex gap-2 py-[12px] items-center">
@@ -26,7 +26,7 @@
               <p
                 class="text-gray-background-8 dark:text-[#CED4DA] w-full text-[16px]"
               >
-                {{ eventData.location }}
+                {{ eventData?.location }}
               </p>
             </div>
           </div>
@@ -37,7 +37,7 @@
             <p
               class="font-normal text-[16px] text-gray-background-8 dark:text-[#CED4DA]"
             >
-              {{ eventData.description }}
+              {{ eventData?.description }}
             </p>
           </div>
           <div class="flex dark:text-[#CED4DA] flex-col gap-[20px]">
@@ -57,7 +57,11 @@
           </div>
 
           <div class="flex flex-col gap-[16px]">
-            <p class="text-[16px] font-medium text-[#1E293B] dark:text-[#CED4DA]">Scan or share this QR code to view event:</p>
+            <p
+              class="text-[16px] font-medium text-[#1E293B] dark:text-[#CED4DA]"
+            >
+              Scan or share this QR code to view event:
+            </p>
             <Qrcode
               :value="eventUrl"
               variant="pixelated"
@@ -75,7 +79,6 @@
                 >Share Event Link</span
               >
             </div>
-           
           </div>
         </div>
         <div class="">
@@ -101,9 +104,7 @@ import { useFirestore } from "vuefire";
 import { doc } from "firebase/firestore";
 import { formatDate, formatTime } from "@/utils/helpers";
 
-
-
-const toast = useToast()
+const toast = useToast();
 const route = useRoute();
 const db = useFirestore();
 const showCheckout = ref(false);
@@ -112,16 +113,12 @@ const colorMode = useColorMode();
 
 const eventRef = doc(db, "events", route.params.id);
 const eventData = useDocument(eventRef);
-onMounted(()=>{
-  console.log(eventData)
-})
+
 
 const clearCheckout = () => {
   showCheckout.value = false;
   ticketStore.resetStore();
 };
-
-
 
 const eventUrl = computed(() => {
   const baseUrl = "https://onetix.com/event"; // Replace with your actual base URL
@@ -135,7 +132,6 @@ const qrColors = computed(() => {
   };
 });
 
-
 const copy = async () => {
   try {
     await navigator.clipboard.writeText(eventUrl.value);
@@ -144,8 +140,6 @@ const copy = async () => {
     console.error("Copy failed", err);
   }
 };
-    
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

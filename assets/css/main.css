@@ -76,12 +76,12 @@ body {
   overflow: hidden;
 }
 
-.btn{
-  @apply  cursor-pointer
+.btn {
+  @apply cursor-pointer;
 }
 
-.btn:disabled{
-  @apply opacity-20
+.btn:disabled {
+  @apply opacity-20;
 }
 
 /* Hide number input arrows in Firefox */
@@ -127,7 +127,6 @@ input[type="number"] {
     background-position: 0% 0%;
   }
 }
-
 
 /* overflow tests */
 /* * {

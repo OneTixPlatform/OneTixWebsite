@@ -8,6 +8,7 @@
   </button>
 </template>
 <script setup>
+defineOptions({ inheritAttrs: true });
 const props = defineProps({
   label: {
     type: String,

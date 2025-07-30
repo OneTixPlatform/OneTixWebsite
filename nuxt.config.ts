@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.css", "remixicon/fonts/remixicon.css"],
-   mazUi: {
+  mazUi: {
     injectComponents: true,
     injectCss: true,
     injectAos: {

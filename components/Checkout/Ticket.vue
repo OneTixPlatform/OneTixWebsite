@@ -12,6 +12,13 @@
       </p>
       <div class="flex gap-2 items-center">
         <p
+          v-if="ticket.isFree"
+          class="text-primary-5 text-[15px] font-semibold"
+        >
+          Free
+        </p>
+        <p
+          v-else
           :class="[
             ticket.available <= 0 ? 'text-secondary-3' : 'text-primary-5',
             ' text-[15px] font-semibold',
@@ -41,31 +48,32 @@
 
     <!-- Quantity Dropdown -->
     <div>
- <MazDropdown
-  v-if="ticket.available > 0"
-  :items="dropdownItems"
-  :disabled="isDisabled"
-  class="custom-dropdown no-dark-mode"
-  :class="[
-    'rounded-[16px]',
-    isDisabled
-      ? 'bg-[#E2E8F0]  border border-gray-300 text-gray-400'
-      : 'bg-white border border-[#E2E8F0] text-[#1E293B]'
-  ]"
->
-  <span :class="[isDisabled ? 'dark:text-white':'']" class="block text-[15px] font-medium text-[#1E293B]">
-    {{ selectedAmount === 0 ? 'Select' : `${selectedAmount} ticket(s)` }}
-  </span>
-</MazDropdown>
-
-</div>
+      <MazDropdown
+        v-if="ticket.available > 0"
+        :items="dropdownItems"
+        :disabled="isDisabled"
+        class="custom-dropdown no-dark-mode"
+        :class="[
+          'rounded-[16px]',
+          isDisabled
+            ? 'bg-[#E2E8F0]  border border-gray-300 text-gray-400'
+            : 'bg-white border border-[#E2E8F0] text-[#1E293B]',
+        ]"
+      >
+        <span
+          :class="[isDisabled ? 'dark:text-white' : '']"
+          class="block text-[15px] font-medium text-[#1E293B]"
+        >
+          {{ selectedAmount === 0 ? "Select" : `${selectedAmount} ticket(s)` }}
+        </span>
+      </MazDropdown>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
 import { formatCurrency } from "@/utils/helpers";
-
 
 const props = defineProps(["ticket", "isEditing", "currentlyEditingId"]);
 const emit = defineEmits(["focus", "blur"]);
@@ -85,7 +93,6 @@ const dropdownItems = computed(() => {
   }));
 });
 
-
 function handleAmountChange(amount) {
   selectedAmount.value = amount; // 🆕 update local label
 
@@ -98,9 +105,6 @@ function handleAmountChange(amount) {
     emit("blur");
   }
 }
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

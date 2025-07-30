@@ -3,7 +3,7 @@
     class="flex flex-col relative items-center bg-secondary-1 dark:bg-purple-brown overflow-hidden px-4 w-full pt-[32px] pb-[94px]"
   >
     <div class="w-full max-w-[1156px]">
-      <div class="h-[380px] w-full rounded-[16px]">
+      <div v-if="eventData.imageUrl" class="h-[380px] w-full rounded-[16px]">
         <img
           :src="eventData.imageUrl"
           alt="details-image"
@@ -11,7 +11,7 @@
         />
       </div>
       <div
-        class="flex flex-col lg:flex-row w-full text-gray-background-8 dark:text-[#CED4DA] font-medium text-[16px]  mt-[16px]"
+        class="flex flex-col lg:flex-row w-full text-gray-background-8 dark:text-[#CED4DA] font-medium text-[16px] mt-[16px]"
       >
         <p>{{ formatDate(eventData.eventDate) }}</p>
         <!-- <div class="items-center hidden lg:flex gap-2">

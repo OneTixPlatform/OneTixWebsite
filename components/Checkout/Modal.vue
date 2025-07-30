@@ -15,7 +15,7 @@
             <IconsArrowLeft />
           </div>
           <p class="font-semibold text-[18px] text-gray-background-8">
-            {{ showSuccess ? "Successfull" : "Checkout" }}
+            {{ showSuccess ? "Successful" : "Checkout" }}
           </p>
         </div>
         <div>
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div v-if="showSuccess" class="flex-grow h-full">
+      <div v-if="showSuccess" @close="emit('close')" class="flex-grow h-full">
         <CheckoutSuccess />
       </div>
 
@@ -201,7 +201,7 @@
               </p>
             </div>
           </div>
-       
+
           <CommonButton
             :class="[
               !ticketStore.name && !ticketStore.email && step === 'Contact'
@@ -211,7 +211,14 @@
             ]"
             :label="step === 'Contact' ? 'CHECKOUT' : 'CONTINUE'"
             @click="nextStep"
-            :disabled="step === 'Ticket' && ticketStore.ticketAmount === 0 || step === 'Contact' && (!ticketStore.name || !ticketStore.email || !keep || !ticketStore.payStack )"
+            :disabled="
+              (step === 'Ticket' && ticketStore.ticketAmount === 0) ||
+              (step === 'Contact' &&
+                (!ticketStore.name ||
+                  !ticketStore.email ||
+                  !keep ||
+                  !ticketStore.payStack))
+            "
           />
         </div>
       </div>
@@ -232,7 +239,7 @@ import { formatDate, formatTime } from "@/utils/helpers";
 import { setData } from "@/utils/helpers";
 
 const step = ref("Ticket");
-const keep = ref(false)
+const keep = ref(false);
 const route = useRoute();
 const router = useRouter();
 const db = useFirestore();
@@ -244,8 +251,8 @@ const showSuccess = ref(false);
 function nextStep() {
   if (step.value === "Ticket") {
     step.value = "Contact";
-  }else if (step.value === 'Contact'){
-    pay()
+  } else if (step.value === "Contact") {
+    pay();
   }
 }
 const ticket = computed(() => ({
@@ -330,23 +337,55 @@ function handleBlur() {
 function payWithPaystack({ email, amount, ticket, ticketCount, event, name }) {
   const config = useRuntimeConfig();
   const publicKey = config.public.PAYSTACK_PUBLIC_KEY;
+
   const handler = window.PaystackPop.setup({
     key: publicKey,
     email,
     amount: amount * 100,
     currency: "NGN",
     callback: function (response) {
-      console.log("Payment successful:");
-      setData(ticket, email, amount, ticketCount, event, name, response);
-      showSuccess.value = true;
-      ticketStore.resetStore()
+      handleSuccessfulPayment({
+        email,
+        amount,
+        ticket,
+        ticketCount,
+        event,
+        name,
+        response,
+      });
     },
     onClose: function () {
-      console.log("Payment popup closed");
+      console.log("⚠️ Payment popup closed");
     },
   });
 
   handler.openIframe();
+}
+
+async function handleSuccessfulPayment({
+  email,
+  amount,
+  ticket,
+  ticketCount,
+  event,
+  name,
+  response,
+}) {
+  try {
+    const ticketId = await setData(
+      ticket,
+      email,
+      amount,
+      ticketCount,
+      event,
+      name,
+      response,
+    );
+    ticketStore.setTicketId(ticketId);
+    showSuccess.value = true;
+  } catch (error) {
+    console.error("❌ Failed to save ticket data:", error);
+  }
 }
 </script>
 
