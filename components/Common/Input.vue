@@ -14,7 +14,7 @@
       <component v-if="icon" :is="icon" class="w-6 h-6" @click="showPassword" />
     </div>
 
-    <div v-if="shouldShowErrors">
+    <div class="flex flex-col gap-[4px]" v-if="shouldShowErrors">
       <span
         v-for="(error, index) in errorMessage"
         :key="index"

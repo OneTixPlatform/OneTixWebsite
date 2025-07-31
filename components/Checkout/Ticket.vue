@@ -75,11 +75,11 @@
 import { ref, computed } from "vue";
 import { formatCurrency } from "@/utils/helpers";
 
+const ticketStore = useTicketStore();
+const selectedAmount = ref(0);
+
 const props = defineProps(["ticket", "isEditing", "currentlyEditingId"]);
 const emit = defineEmits(["focus", "blur"]);
-
-const ticketStore = useTicketStore();
-const selectedAmount = ref(0); // 🆕 tracks local amount
 
 const isDisabled = computed(() => {
   return props.isEditing && props.currentlyEditingId !== props.ticket.id;
@@ -94,7 +94,7 @@ const dropdownItems = computed(() => {
 });
 
 function handleAmountChange(amount) {
-  selectedAmount.value = amount; // 🆕 update local label
+  selectedAmount.value = amount;
 
   if (amount > 0) {
     ticketStore.setTicket(props.ticket);

@@ -63,11 +63,23 @@
             >
               <div
                 :class="[
-                  step === s.name ? 'bg-secondary-1' : 'bg-[#F1F5F9]',
-                  'h-[32px] w-[32px] flex rounded-full items-center justify-center ',
+                  s.name === 'Ticket' && ticketStore.ticket.name
+                    ? 'bg-[#ECFDF5]'
+                    : step === s.name
+                      ? 'bg-secondary-1'
+                      : 'bg-[#F1F5F9]',
+                  'h-[32px] w-[32px] flex rounded-full items-center justify-center',
                 ]"
               >
-                <component :is="step === s.name ? s.activeIcon : s.icon" />
+                <component
+                  :is="
+                    s.name === 'Ticket' && ticketStore.ticket.name
+                      ? IconsDone
+                      : step === s.name
+                        ? s.activeIcon
+                        : s.icon
+                  "
+                />
               </div>
               <p
                 :class="[
@@ -216,7 +228,6 @@
               (step === 'Contact' &&
                 (!ticketStore.name ||
                   !ticketStore.email ||
-                  !keep ||
                   !ticketStore.payStack))
             "
           />
@@ -234,6 +245,7 @@ import IconsTicket from "@/components/icons/Tickets.vue";
 import IconsContact from "@/components/icons/Contact.vue";
 import IconsCard from "@/components/icons/Card.vue";
 import IconsActiveIcon from "../icons/ActiveIcon.vue";
+import IconsDone from "@/components/icons/checkedSmall.vue";
 import { formatDate, formatTime } from "@/utils/helpers";
 // import {payWithPaystack} from '@/services/paystack'
 import { setData } from "@/utils/helpers";
@@ -244,9 +256,12 @@ const route = useRoute();
 const router = useRouter();
 const db = useFirestore();
 const ticketStore = useTicketStore();
-
 const showLeaveCheckout = ref(false);
 const showSuccess = ref(false);
+const isEditing = ref(false);
+const currentlyEditingId = ref(null);
+
+const eventId = route.params.id;
 
 function nextStep() {
   if (step.value === "Ticket") {
@@ -292,10 +307,6 @@ function previousStep() {
     step.value = "Ticket";
   }
 }
-const isEditing = ref(false);
-const currentlyEditingId = ref(null);
-
-const eventId = route.params.id;
 
 const ticketTypesQuery = query(
   collection(db, "ticketTypes"),
@@ -306,24 +317,6 @@ const ticketTypes = useCollection(ticketTypesQuery);
 
 const props = defineProps(["event"]);
 const emit = defineEmits(["close"]);
-
-const steps = [
-  {
-    name: "Ticket",
-    icon: IconsTicket,
-    activeIcon: IconsActiveIcon,
-  },
-  {
-    name: "Contact",
-    icon: IconsContact,
-    activeIcon: IconsActiveIcon,
-  },
-  {
-    name: "Payment",
-    icon: IconsCard,
-    activeIcon: IconsActiveIcon,
-  },
-];
 
 function handleFocus(ticketId) {
   isEditing.value = true;
@@ -355,9 +348,7 @@ function payWithPaystack({ email, amount, ticket, ticketCount, event, name }) {
         response,
       });
     },
-    onClose: function () {
-      console.log("⚠️ Payment popup closed");
-    },
+    onClose: function () {},
   });
 
   handler.openIframe();
@@ -388,6 +379,23 @@ async function handleSuccessfulPayment({
     console.error("❌ Failed to save ticket data:", error);
   }
 }
+const steps = [
+  {
+    name: "Ticket",
+    icon: IconsTicket,
+    activeIcon: IconsActiveIcon,
+  },
+  {
+    name: "Contact",
+    icon: IconsContact,
+    activeIcon: IconsActiveIcon,
+  },
+  {
+    name: "Payment",
+    icon: IconsCard,
+    activeIcon: IconsActiveIcon,
+  },
+];
 </script>
 
 <style scoped>
