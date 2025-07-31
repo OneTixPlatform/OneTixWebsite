@@ -9,6 +9,7 @@
           v-model="form.firstName"
           class="w-full"
           placeHolder="Enter first Name"
+          :errorMessage="v$.firstName.$errors"
         />
       </div>
       <div class="w-full flex flex-col gap-[8px]">
@@ -19,6 +20,7 @@
           v-model="form.lastName"
           class="w-full"
           placeHolder="Enter Last Name"
+          :errorMessage="v$.lastName.$errors"
         />
       </div>
       <div class="w-full flex flex-col gap-[8px]">
@@ -29,13 +31,20 @@
           class="w-full"
           placeHolder="Enter email"
           v-model="form.email"
+          :errorMessage="v$.email.$errors"
         />
       </div>
       <div class="w-full flex flex-col gap-[8px]">
         <label class="text-[14px] text-gray-background-7">
-          Confirm Name <span style="color: #ef4444">*</span>
+          Confirm Email <span style="color: #ef4444">*</span>
         </label>
-        <CommonInput class="w-full" type="email" placeHolder="Confirm Email" />
+        <CommonInput
+          class="w-full"
+          type="email"
+          placeHolder="Confirm Email"
+          :errorMessage="v$.confirmEmail.$errors"
+          v-model="form.confirmEmail"
+        />
       </div>
     </div>
     <div
@@ -77,20 +86,47 @@
 
 <script setup>
 import Paystack from "@/assets/images/img/Paystick.png";
+// Import Dependencies
+import { required, helpers, sameAs } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 const usePaystack = ref(false);
 const ticketStore = useTicketStore();
 const form = reactive({
-  firstName: ticketStore.firstName,
-  name: ticketStore.name,
-  email: ticketStore.email,
-  lastName: ticketStore.lastName,
+  firstName: "",
+  name: "",
+  email: "",
+  confirmEmail: "",
+  lastName: "",
 });
 
 const togglePaystack = () => {
   usePaystack.value = !usePaystack.value;
   ticketStore.setPaystack(usePaystack.value);
 };
+const rules = computed(() => ({
+  email: {
+    required: helpers.withMessage("Email is required", required),
+    email: helpers.withMessage("Enter a valid email", (value) =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+    ),
+  },
+  confirmEmail: {
+    required: helpers.withMessage("Confirm email is required", required),
+    sameAsEmail: helpers.withMessage(
+      "Email addresses do not match",
+      sameAs(form.email),
+    ),
+  },
+  firstName: {
+    required: helpers.withMessage("First name is required", required),
+  },
+  lastName: {
+    required: helpers.withMessage("Last name is required", required),
+  },
+}));
+
+const v$ = useVuelidate(rules, form, { $autoDirty: true });
 
 watch(
   () => [form.firstName, form.lastName],

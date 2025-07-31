@@ -2,63 +2,61 @@
   <div
     class="w-full flex flex-col lg:flex-row items-center lg:items-start pt-[48px] pb-[119px] gap-[146px] lg:px-[142px] px-4 bg-[#F8FAFC]"
   >
-<div
-  v-if="ticketEvent"
-  id="ticket-pdf-content"
-  class="flex flex-col items-center text-center gap-10"
-  style="
-    position: absolute;
-    left: -9999px;
-    top: 0;
-    width: 800px;
-    padding: 80px 40px;
-    background: white;
-    font-family: 'Arial', sans-serif;
-  "
->
-  <!-- Logo -->
-  <div>
-    <img :src="oneTix" alt="one-tix logo" style="height: 120px;" />
-  </div>
+    <div
+      v-if="ticketEvent"
+      id="ticket-pdf-content"
+      class="flex flex-col items-center text-center gap-10"
+      style="
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        width: 800px;
+        padding: 80px 40px;
+        background: white;
+        font-family: &quot;Arial&quot;, sans-serif;
+      "
+    >
+      <!-- Logo -->
+      <div>
+        <img :src="oneTix" alt="one-tix logo" style="height: 120px" />
+      </div>
 
-  <!-- Event Info -->
-  <div style="max-width: 600px;">
-    <h2 style="font-size: 38px; font-weight: 700; margin-bottom: 20px;">
-      {{ ticketEvent.title }}
-    </h2>
-    <p style="font-size: 22px; margin-bottom: 10px;">
-      <strong>Date:</strong> {{ formatDate(ticketEvent.eventDate) }}
-    </p>
-    <p style="font-size: 22px; margin-bottom: 10px;">
-      <strong>Time:</strong> {{ formatTime(ticketEvent.eventDate) }}
-    </p>
-    <p style="font-size: 22px;">
-      <strong>Location:</strong> {{ ticketEvent.location }}
-    </p>
-  </div>
+      <!-- Event Info -->
+      <div style="max-width: 600px">
+        <h2 style="font-size: 38px; font-weight: 700; margin-bottom: 20px">
+          {{ ticketEvent.title }}
+        </h2>
+        <p style="font-size: 22px; margin-bottom: 10px">
+          <strong>Date:</strong> {{ formatDate(ticketEvent.eventDate) }}
+        </p>
+        <p style="font-size: 22px; margin-bottom: 10px">
+          <strong>Time:</strong> {{ formatTime(ticketEvent.eventDate) }}
+        </p>
+        <p style="font-size: 22px">
+          <strong>Location:</strong> {{ ticketEvent.location }}
+        </p>
+      </div>
 
-  <!-- Buyer Info -->
-  <div style="max-width: 600px; font-size: 24px;">
-    <p style="margin-bottom: 10px;">
-      <strong>Name:</strong> {{ userTicket.buyerName }}
-    </p>
-    <p>
-      <strong>Tickets:</strong> {{ userTicket.count }}
-    </p>
-  </div>
+      <!-- Buyer Info -->
+      <div style="max-width: 600px; font-size: 24px">
+        <p style="margin-bottom: 10px">
+          <strong>Name:</strong> {{ userTicket.buyerName }}
+        </p>
+        <p><strong>Type:</strong> {{ userTicket.ticketName }}</p>
+        <p><strong>Tickets:</strong> {{ userTicket.count }}</p>
+      </div>
 
-  <!-- QR Code -->
-  <div style="margin-top: 30px; width: 420px; height: 420px;">
-    <Qrcode
-      :value="ticketStore.currentUserTicket"
-      :size="700"
-      variant="pixelated"
-      :foreground="qrColors.foreground"
-      :background="qrColors.background"
-    />
-  </div>
-</div>
-
+      <!-- QR Code -->
+      <div style="margin-top: 30px; width: 420px; height: 420px">
+        <Qrcode
+          :value="ticketStore.currentUserTicket"
+          :size="700"
+          variant="pixelated"
+          :foreground="qrColors.foreground"
+          :background="qrColors.background"
+        />
+      </div>
+    </div>
 
     <div
       v-if="userTicket && ticketEvent"
@@ -83,7 +81,7 @@
         <h1 class="font-bold text-[24px] leading-[32px] text-gray-background-8">
           {{ ticketEvent.title }}
         </h1>
-        <div class="flex  mb-4 justify-between mt-[16px]">
+        <div class="flex mb-4 justify-between mt-[16px]">
           <div>
             <p class="text-[14px] text-[#64748B]">Date</p>
             <p class="font-medium text-[16px] text-gray-background-8">
@@ -117,7 +115,10 @@
           :foreground="qrColors.foreground"
           :background="qrColors.background"
         />
-        <div class="flex flex-col  gap-[6px]">
+        <div class="flex flex-col gap-[6px]">
+          <p class="text-secondary-5 font-semibold text-[18px]">
+            {{ userTicket.ticketName }}
+          </p>
           <p class="text-secondary-5 font-semibold text-[18px]">
             {{ userTicket.count }} ticket(s)
           </p>
@@ -128,17 +129,15 @@
         </div>
       </div>
 
-    <!-- Left Circle -->
-<div
-  class="absolute rounded-full  border-r border-[#E2E8F0] bg-[#F8FAFC] lg:-left-[41px] bottom-[140px] -left-[10px]  lg:bottom-48
-         h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] md:h-[70px] md:w-[70px] lg:h-[81px] lg:w-[81px]"
-></div>
+      <!-- Left Circle -->
+      <div
+        class="absolute rounded-full border-r border-[#E2E8F0] bg-[#F8FAFC] lg:-left-[41px] bottom-[140px] -left-[10px] lg:bottom-48 h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] md:h-[70px] md:w-[70px] lg:h-[81px] lg:w-[81px]"
+      ></div>
 
-<!-- Right Circle -->
-<div
-  class="absolute rounded-full border-l border-[#E2E8F0] bg-[#F8FAFC] lg:-right-[41px] -right-[10px] bottom-[140px] lg:bottom-48
-         h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] md:h-[70px] md:w-[70px] lg:h-[81px] lg:w-[81px]"
-></div>
+      <!-- Right Circle -->
+      <div
+        class="absolute rounded-full border-l border-[#E2E8F0] bg-[#F8FAFC] lg:-right-[41px] -right-[10px] bottom-[140px] lg:bottom-48 h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] md:h-[70px] md:w-[70px] lg:h-[81px] lg:w-[81px]"
+      ></div>
     </div>
 
     <!-- skeleton loader -->
@@ -196,7 +195,6 @@ import { useFirestore } from "vuefire";
 import { formatDate, formatTime } from "@/utils/helpers";
 import html2canvas from "html2canvas";
 
-
 const db = useFirestore();
 const colorMode = useColorMode();
 const ticketStore = useTicketStore();
@@ -241,10 +239,9 @@ async function fetchEventById(eventId) {
 const qrColors = computed(() => {
   return {
     foreground: colorMode.value === "dark" ? "#FFFFFF" : "#000000",
-    background: "transparent", 
+    background: "transparent",
   };
 });
-
 
 let jsPDF;
 try {
@@ -307,20 +304,19 @@ const downloadTicketPdf = async () => {
   }
 };
 
-onUnmounted(()=>{
-    ticketStore.$reset()
-})
+onUnmounted(() => {
+  ticketStore.$reset();
+});
 
 onMounted(() => {
   const ticketId = ticketStore.currentUserTicket;
   if (!ticketId) {
     console.warn("No ticket ID found in store. Redirecting...");
-    useRouter().push('/')
+    useRouter().push("/");
     return;
   }
   fetchTicketById(ticketId);
 });
-
 </script>
 
 <style lang="scss" scoped></style>

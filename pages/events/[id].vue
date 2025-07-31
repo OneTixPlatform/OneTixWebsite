@@ -114,7 +114,6 @@ const colorMode = useColorMode();
 const eventRef = doc(db, "events", route.params.id);
 const eventData = useDocument(eventRef);
 
-
 const clearCheckout = () => {
   showCheckout.value = false;
   ticketStore.resetStore();

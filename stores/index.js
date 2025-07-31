@@ -17,11 +17,17 @@ export const useTicketStore = defineStore("ticket", {
   }),
 
   actions: {
-    // Recalculate subtotal and total
     calculateTotal() {
       const price = this.ticket.price || 0;
-      this.subTotal = price * Number(this.ticketAmount) + this.oneTixFee;
-      this.Total = this.subTotal;
+      const quantity = Number(this.ticketAmount);
+
+      const feeDetails = this.calculateFees(price, quantity);
+
+      this.subTotal = feeDetails.subtotal;
+      this.oneTixFee = feeDetails.platformFee;
+      this.gatewayFee = feeDetails.gatewayFee;
+      this.Total = feeDetails.totalPaid;
+      this.currency = feeDetails.currency;
     },
 
     setTicket(ticket) {
@@ -37,6 +43,38 @@ export const useTicketStore = defineStore("ticket", {
       this.calculateTotal();
     },
 
+    calculateFees(unitPrice, quantity) {
+      // Fee configuration
+      const PLATFORM_PERCENT = 0.08;
+      const PLATFORM_FLAT = 100;
+
+      const GATEWAY_PERCENT = 0.015;
+      const GATEWAY_FLAT = 100;
+      const GATEWAY_THRESHOLD = 2500;
+      const GATEWAY_MAX = 2000;
+
+      const subtotal = unitPrice * quantity;
+
+      const platformFee =
+        Math.round(subtotal * PLATFORM_PERCENT) + PLATFORM_FLAT;
+
+      const paystackPercent = Math.round(subtotal * GATEWAY_PERCENT);
+      const paystackFlat = subtotal < GATEWAY_THRESHOLD ? 0 : GATEWAY_FLAT;
+      const gatewayFee = Math.min(paystackPercent + paystackFlat, GATEWAY_MAX);
+
+      const totalPaid = subtotal + platformFee;
+      const yourProfit = platformFee - gatewayFee;
+
+      return {
+        subtotal,
+        platformFee,
+        gatewayFee,
+        totalPaid,
+        yourProfit,
+        currency: "NGN",
+      };
+    },
+
     resetStore() {
       this.ticket = {};
       this.ticketAmount = 0;
@@ -47,7 +85,7 @@ export const useTicketStore = defineStore("ticket", {
         (this.firstName = ""),
         (this.name = ""));
       this.payStack = "";
-      this.currentUserTicket = ""
+      this.currentUserTicket = "";
     },
     setUserDetails(name, email, firstName, lastName) {
       this.name = name;
