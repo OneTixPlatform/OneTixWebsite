@@ -258,6 +258,7 @@ function nextStep() {
 const ticket = computed(() => ({
   id: ticketStore.ticket?.id ?? "",
   available: ticketStore.ticket?.available ?? 0,
+  name: ticketStore?.ticket?.name,
 }));
 
 const pay = () => {
@@ -299,8 +300,8 @@ const eventId = route.params.id;
 const ticketTypesQuery = query(
   collection(db, "ticketTypes"),
   where("eventId", "==", eventId),
+  where("public", "==", true),
 );
-
 const ticketTypes = useCollection(ticketTypesQuery);
 
 const props = defineProps(["event"]);

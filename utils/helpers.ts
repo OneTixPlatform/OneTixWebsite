@@ -38,7 +38,7 @@ export function formatCurrency(amount: number) {
 
 // setdata
 export async function setData(
-  ticket: { id: string; available: number },
+  ticket: { id: string; available: number; name: string },
   email: string,
   amount: number,
   ticketCount: number,
@@ -46,7 +46,6 @@ export async function setData(
   name: string,
   response: { reference: string; transaction: string; receipt_url?: string },
   mode: "paystack" | "cash" = "paystack",
-  router: ReturnType<typeof useRouter>,
 ) {
   const db = useFirestore();
   const batch = writeBatch(db);
@@ -64,6 +63,7 @@ export async function setData(
     buyerEmail: email,
     ticketCount,
     amount,
+    ticketName: ticket.name,
     transactionId: response.transaction,
     mode,
     paymentRef: response.reference,
@@ -79,6 +79,7 @@ export async function setData(
     buyerName: name,
     buyerEmail: email,
     isUsed: false,
+    ticketName: ticket.name,
     usedAt: null,
     count: ticketCount,
     createdAt: serverTimestamp(),

@@ -28,7 +28,9 @@
           {{ eventData.title }}
         </p>
 
-        <p class="text-[#64748B] clamp-3 text-[12px] sm:text-[14px] dark:text-[#CED4DA]">
+        <p
+          class="text-[#64748B] clamp-3 text-[12px] sm:text-[14px] dark:text-[#CED4DA]"
+        >
           {{ eventData.description }}
         </p>
         <div class="flex items-center gap-[8px]">
@@ -40,9 +42,10 @@
             <div
               class="h-[8px] w-[8px] rounded-full bg-[#64748B] dark:bg-[#CED4DA]"
             ></div>
-            <span class=" text-[12px] sm:text-[14px] leading-[18px] dark:text-[#EFF2F4]">{{
-              formatTime(eventData.eventDate)
-            }}</span>
+            <span
+              class="text-[12px] sm:text-[14px] leading-[18px] dark:text-[#EFF2F4]"
+              >{{ formatTime(eventData.eventDate) }}</span
+            >
           </div>
         </div>
       </div>
