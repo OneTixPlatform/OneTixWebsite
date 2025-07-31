@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Spacer to prevent layout jump when header becomes fixed -->
-    <div v-if="isScrolled" class="h-[80px] bg-red-400 xl:h-[88px]"></div>
+    <div v-if="isScrolled" class="h-[80px] xl:h-[88px]"></div>
     <header
       :class="[
         isScrolled
@@ -105,7 +105,7 @@ const links = [
   { name: "Discover events", path: "/" },
   { name: "How Onetix works", path: "/How" },
   { name: "Pricing", path: "/" },
-  { name: "About us", path: "/" },
+  { name: "About us", path: "/about-us" },
 ];
 
 const colorMode = useColorMode();

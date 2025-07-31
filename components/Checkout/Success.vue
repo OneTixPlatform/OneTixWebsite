@@ -8,7 +8,7 @@
         ORDER SUCCESSFUL
       </p>
       <CommonButton
-        @click="navigateTo('/Ticket')"
+        @click="goToTicket"
         label="VIEW MY TICKET"
         class="bg-primary-5 mt-4 cursor-pointer text-[16px] text-white max-w-[300px] w-full rounded-[16px] px-[16px] py-[8px]"
       />
@@ -25,8 +25,6 @@ const emit = defineEmits(["close"]);
 async function goToTicket() {
   try {
     await router.push("/ticket");
-    emit("close");
-    console.log("✅ Navigation successful");
   } catch (err) {
     console.error("❌ Navigation failed:", err);
   }
