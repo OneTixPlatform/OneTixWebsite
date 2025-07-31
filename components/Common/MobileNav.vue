@@ -85,7 +85,7 @@ const links = [
   { name: "Discover events", path: "/" },
 
   { name: "Pricing", path: "/how" },
-  { name: "About us", path: "/" },
+  { name: "About us", path: "/about-us" },
   { name: "Contact us", path: "/" },
 ];
 

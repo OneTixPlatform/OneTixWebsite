@@ -146,8 +146,10 @@
                 @blur="handleBlur"
               />
             </div>
-            <CheckoutContact v-if="step === 'Contact'" />
-            <!-- <CheckoutPayment v-if="step === 'Payment'" /> -->
+            <CheckoutContact
+              v-if="step === 'Contact'"
+              ref="checkoutContactRef"
+            />
           </div>
         </div>
 
@@ -228,7 +230,8 @@
               (step === 'Contact' &&
                 (!ticketStore.name ||
                   !ticketStore.email ||
-                  !ticketStore.payStack))
+                  !ticketStore.payStack ||
+                  checkoutContactRef?.v$?.$invalid))
             "
           />
         </div>
@@ -260,7 +263,7 @@ const showLeaveCheckout = ref(false);
 const showSuccess = ref(false);
 const isEditing = ref(false);
 const currentlyEditingId = ref(null);
-
+const checkoutContactRef = ref(null);
 const eventId = route.params.id;
 
 function nextStep() {

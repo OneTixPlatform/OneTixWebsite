@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col lg:flex-row items-center lg:items-start pt-[48px] pb-[119px] gap-[146px] lg:px-[142px] px-4 bg-[#F8FAFC]"
+    class="w-full flex flex-col lg:flex-row items-center lg:items-start pt-[48px] pb-[119px] gap-[146px] 2xl:justify-center lg:px-[142px] px-4 bg-[#F8FAFC]"
   >
     <div
       v-if="ticketEvent"
@@ -308,10 +308,17 @@ onUnmounted(() => {
   ticketStore.$reset();
 });
 
-onMounted(() => {
+onMounted(async () => {
+  // const ticketId = ticketStore.currentUserTicket;
+  // if (!ticketId) {
+  //   console.warn("No ticket ID found in store. Redirecting...");
+  //   useRouter().push("/");
+  //   return;
+  // }
+  // fetchTicketById(ticketId);
+  await nextTick(); // Let store update
   const ticketId = ticketStore.currentUserTicket;
   if (!ticketId) {
-    console.warn("No ticket ID found in store. Redirecting...");
     useRouter().push("/");
     return;
   }

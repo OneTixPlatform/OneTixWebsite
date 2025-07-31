@@ -127,7 +127,7 @@ const rules = computed(() => ({
 }));
 
 const v$ = useVuelidate(rules, form, { $autoDirty: true });
-
+defineExpose({ v$ });
 watch(
   () => [form.firstName, form.lastName],
   ([first, last]) => {
