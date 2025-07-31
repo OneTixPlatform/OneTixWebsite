@@ -84,7 +84,7 @@ import setUpDark from "@/assets/images/img/setUpDark.png";
 import OfferDark from "@/assets/images/img/OfferDark.png";
 import WatchDark from "@/assets/images/img/WatchDark.png";
 import RecieveDark from "@/assets/images/img/RecieveDark.png";
-import MakeDark from "@/assets/images/img/Makedark.png";
+import MakeDark from "@/assets/images/img/MakeDark.png";
 
 const colorMode = useColorMode();
 const isDark = computed(() => colorMode.value === "dark");
