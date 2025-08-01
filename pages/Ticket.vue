@@ -265,37 +265,26 @@ const downloadTicketPdf = async () => {
     const { default: html2canvas } = await import("html2canvas");
     const { jsPDF } = await import("jspdf/dist/jspdf.umd.min.js");
 
-    // Capture canvas at medium quality
     const canvas = await html2canvas(element, {
-      scale: 1.5,
+      scale: 2,
       useCORS: true,
       backgroundColor: "#ffffff",
     });
 
-    // Compress to JPEG
-    const imgData = canvas.toDataURL("image/jpeg", 0.85);
+    const imgData = canvas.toDataURL("image/jpeg", 0.95);
 
-    // Initialize PDF with compression
-    const pdf = new jsPDF("p", "mm", "a4", true);
+    const pdf = new jsPDF("p", "mm", "a4");
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
 
-    const imgHeight = (canvas.height * pageWidth) / canvas.width;
-    let position = 0;
-    let remainingHeight = imgHeight;
+    // Scale image to fit exactly in A4 page
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    // Add first page
-    pdf.addImage(imgData, "JPEG", 0, position, pageWidth, imgHeight);
-    remainingHeight -= pageHeight;
+    // If image height is taller than A4, scale down
+    const scaledHeight = imgHeight > pageHeight ? pageHeight : imgHeight;
 
-    // Additional pages if needed
-    while (remainingHeight > 0) {
-      position = -remainingHeight + imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "JPEG", 0, position, pageWidth, imgHeight);
-      remainingHeight -= pageHeight;
-    }
-
+    pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, scaledHeight);
     pdf.save(`${userTicket.value.id}.pdf`);
   } catch (error) {
     console.error("📛 Error generating PDF:", error);
@@ -303,6 +292,7 @@ const downloadTicketPdf = async () => {
     loading.value = false;
   }
 };
+
 
 onUnmounted(() => {
   ticketStore.$reset();
