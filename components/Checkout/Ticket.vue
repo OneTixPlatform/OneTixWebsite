@@ -48,7 +48,14 @@
 
     <!-- Quantity Dropdown -->
     <div>
-      <MazDropdown
+      <CommonDropDown
+        v-if="ticket.available > 0"
+        v-model="selectedAmount"
+        :items="dropdownItemsSimple"
+        @update:model-value="handleAmountChange"
+        :disabled="isDisabled"
+      />
+      <!-- <MazDropdown
         v-if="ticket.available > 0"
         :items="dropdownItems"
         :disabled="isDisabled"
@@ -66,7 +73,7 @@
         >
           {{ selectedAmount === 0 ? "Select" : `${selectedAmount} ticket(s)` }}
         </span>
-      </MazDropdown>
+      </MazDropdown> -->
     </div>
   </div>
 </template>
@@ -85,11 +92,11 @@ const isDisabled = computed(() => {
   return props.isEditing && props.currentlyEditingId !== props.ticket.id;
 });
 
-const dropdownItems = computed(() => {
-  const maxSelectable = Math.min(10, props.ticket.available);
-  return Array.from({ length: maxSelectable + 1 }, (_, i) => ({
+const dropdownItemsSimple = computed(() => {
+  const max = Math.min(10, props.ticket.available);
+  return Array.from({ length: max + 1 }, (_, i) => ({
     label: i === 0 ? "0 (Clear)" : `${i}`,
-    action: () => handleAmountChange(i),
+    value: i,
   }));
 });
 

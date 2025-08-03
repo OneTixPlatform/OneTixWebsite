@@ -293,20 +293,12 @@ const downloadTicketPdf = async () => {
   }
 };
 
-
 onUnmounted(() => {
   ticketStore.$reset();
 });
 
 onMounted(async () => {
-  // const ticketId = ticketStore.currentUserTicket;
-  // if (!ticketId) {
-  //   console.warn("No ticket ID found in store. Redirecting...");
-  //   useRouter().push("/");
-  //   return;
-  // }
-  // fetchTicketById(ticketId);
-  await nextTick(); // Let store update
+  await nextTick()
   const ticketId = ticketStore.currentUserTicket;
   if (!ticketId) {
     useRouter().push("/");

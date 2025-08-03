@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import oneTix from "@/assets/images/logo/onetix.png";
 import oneTixWhite from "@/assets/images/logo/onetixWhite.png";
 import { useRoute } from "vue-router";
@@ -71,12 +71,12 @@ import { nextTick } from "vue";
 
 const router = useRouter();
 
-function handleNav(path: string) {
+function handleNav(path) {
   router.push(path);
-  // Delay the menu close so routing settles
+
   setTimeout(() => {
     emit("close");
-  }, 150); // smooth transition, you can adjust the delay
+  }, 150);
 }
 
 const route = useRoute();
