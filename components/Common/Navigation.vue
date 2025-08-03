@@ -103,7 +103,6 @@ onUnmounted(() => {
 
 const links = [
   { name: "Discover events", path: "/" },
-  { name: "How Onetix works", path: "/How" },
   { name: "Pricing", path: "/" },
   { name: "About us", path: "/about-us" },
 ];

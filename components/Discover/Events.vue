@@ -24,7 +24,7 @@
     <div class="overflow-x-auto no-scrollbar mt-[48px] mb-[48px] w-full">
       <div
         v-if="isLoading"
-        class="flex gap-[20px] lg:grid lg:grid-cols-4 2xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
+        class="flex gap-[20px] lg:grid lg:grid-cols-4 3xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
       >
         <!-- loader -->
         <div

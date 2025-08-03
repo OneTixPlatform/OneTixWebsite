@@ -7,11 +7,12 @@
       <p class="text-[20px] text-gray-background-9 font-medium">
         ORDER SUCCESSFUL
       </p>
-      <CommonButton
+      <p class="text-[14px] text-[#64748B]">Taking you to your ticket now...</p>
+      <!-- <CommonButton
         @click="goToTicket"
         label="VIEW MY TICKET"
         class="bg-primary-5 mt-4 cursor-pointer text-[16px] text-white max-w-[300px] w-full rounded-[16px] px-[16px] py-[8px]"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -20,7 +21,6 @@
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const emit = defineEmits(["close"]);
 
 async function goToTicket() {
   try {
@@ -29,6 +29,12 @@ async function goToTicket() {
     console.error("❌ Navigation failed:", err);
   }
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    goToTicket();
+  }, 4000);
+});
 </script>
 
 <style lang="scss" scoped></style>

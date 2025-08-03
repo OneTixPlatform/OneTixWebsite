@@ -3,7 +3,7 @@
     <EventsDetailsHeroSection :eventData="eventData" />
     <div v-if="eventData" class="lg:px-[142px] pb-[100px]">
       <div
-        class="flex flex-col py-[56px] lg:flex-row lg:border-b-[1px] lg:border-b-[#CBD5E1] px-4 gap-[45px] 2xl:mx-auto"
+        class="flex flex-col py-[56px] lg:flex-row 2xl:justify-center lg:border-b-[1px] lg:border-b-[#CBD5E1] px-4 gap-[45px] 2xl:mx-auto"
       >
         <div class="flex flex-col w-full max-w-[741px] gap-[24px]">
           <div>
