@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="relative">
     <CommonNavigation @showMobileNav="showMobileNav = true" />
     <div class="flex-1">
       <slot />
