@@ -47,10 +47,10 @@
 
       <!-- login -->
       <div class="flex items-center cursor-pointer">
-        <span
+        <!-- <span
           class="px-[24px] text-gray-background-8 dark:text-white hidden lg:flex py-[8px] font-semibold text-[16px]"
           >Login</span
-        >
+        > -->
         <button
           class="bg-primary-5 hidden lg:flex h-[48px] items-center justify-center rounded-[50px] text-white px-[16px] py-[8px]"
         >

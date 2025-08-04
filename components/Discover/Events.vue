@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white dark:bg-black-highest lg:px-[64px] mt-[87px] px-[20px]">
-    <div class="flex gap-[16px] items-center">
+    <div class="flex gap-[16px] 2xl:mx-auto 2xl:max-w-[1120px] items-center">
       <div class="flex gap-[4px] items-center">
         <IconsLocation />
         <MazDropdown>
@@ -21,10 +21,10 @@
       </div>
     </div>
     <!-- overflowCard -->
-    <div class="overflow-x-auto no-scrollbar mt-[48px] mb-[48px] w-full">
+    <div class="overflow-x-auto no-scrollbar mt-[48px] mb-[48px] 2xl:mx-auto 2xl:max-w-[1400px] w-full">
       <div
         v-if="isLoading"
-        class="flex gap-[20px] lg:grid lg:grid-cols-4 3xl:place-items-center lg:gap-[20px] min-w-max lg:min-w-full"
+        class="flex gap-[20px] lg:grid lg:grid-cols-4  lg:gap-[20px] min-w-max lg:min-w-full"
       >
         <!-- loader -->
         <div

@@ -72,7 +72,7 @@
             />
             <div
               @click="copy"
-              class="rounded-[8px] bg-[#F1F5F9] px-[12px] py-[8px] flex gap-[8px] cursor-pointer items-center w-[150px]"
+              class="rounded-[8px] bg-[#F1F5F9] px-[12px] py-[8px] max-w-[200px] w-full flex gap-[8px] cursor-pointer items-center "
             >
               <IconsLightning />
               <span class="text-[12px] font-medium text-gray-background-7"

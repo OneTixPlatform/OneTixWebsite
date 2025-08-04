@@ -1,13 +1,13 @@
 <template>
   <div
     style="clip-path: polygon(100% 0, 100% 99%, 80% 100%, 35% 94%, 0 100%, 0 0)"
-    class="bg-[#F1F5F9] dark:bg-[#262A2F] py-[120px] -mt-[100px] z-0 lg:px-[88px] px-4 w-full"
+    class="bg-[#F1F5F9] dark:bg-[#262A2F] py-[120px] -mt-[100px]  z-0 lg:px-[88px] px-4 w-full"
   >
     <div
-      class="flex flex-col lg:flex-row 2xl:mx-auto max-w-[1320px] w-full items-center gap-[30px]"
+      class="flex flex-col lg:flex-row 2xl:mx-auto  max-w-[1320px] w-full items-center gap-[30px] 2xl:gap-[15px]"
     >
       <div
-        class="flex flex-col items-center sm:flex-row gap-[15px] sm:gap-[30px]"
+        class="flex flex-col items-center sm:flex-row gap-[15px] 2xl:mx-auto sm:gap-[30px]"
       >
         <IconsDirectDark v-if="isDark" />
         <IconsDirect v-else />
@@ -41,7 +41,7 @@
     </div>
     <div
       v-if="isDark"
-      class="grid grid-cols-1 sm:grid-cols-2 mt-[48px] gap-[58px] place-items-center mb-[109px] w-full lg:grid-cols-4"
+      class="grid grid-cols-1 sm:grid-cols-2 mt-[48px] gap-[58px] place-items-center 2xl:mx-auto 2xl:max-w-[1120px] mb-[109px] w-full lg:grid-cols-4"
     >
       <div
         v-for="(item, index) in darkitems"
@@ -57,7 +57,7 @@
     </div>
     <div
       v-else
-      class="grid grid-cols-1 sm:grid-cols-2 mt-[48px] gap-[58px] place-items-center mb-[109px] w-full lg:grid-cols-4"
+      class="grid grid-cols-1  sm:grid-cols-2 mt-[48px] gap-[58px] place-items-center 2xl:mx-auto 2xl:max-w-[1120px] mb-[109px] w-full lg:grid-cols-4"
     >
       <div
         v-for="(item, index) in items"
