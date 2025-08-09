@@ -59,7 +59,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, limit, getDocs ,where } from "firebase/firestore";
 import { useFirestore } from "vuefire";
 
 const db = useFirestore();
@@ -72,8 +72,8 @@ async function fetchEvents() {
   try {
     const eventsQuery = query(
       collection(db, "events"),
-      orderBy("eventDate", "asc"),
-      limit(10),
+      limit(8),
+       where("status", "==", "published"),
     );
 
     const snapshot = await getDocs(eventsQuery);
@@ -81,10 +81,14 @@ async function fetchEvents() {
       id: doc.id,
       ...doc.data(),
     }));
+
+
+
+
   } catch (error) {
     console.error("Error fetching events:", error);
   } finally {
-    isLoading.value = false; // ✅ always stop loading even if no data
+    isLoading.value = false; 
   }
 }
 
