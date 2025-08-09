@@ -30,8 +30,8 @@
 
         <p
           class="text-[#64748B] clamp-3 text-[12px] sm:text-[14px] dark:text-[#CED4DA]"
+            v-html="eventData.description"
         >
-          {{ eventData.description }}
         </p>
         <div class="flex items-center gap-[8px]">
           <span
