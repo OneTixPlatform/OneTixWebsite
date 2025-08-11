@@ -79,7 +79,7 @@ function select(value) {
   emit("update:modelValue", value);
   isOpen.value = false;
 
-  // ✅ Mobile fix: remove focus to prevent reopen
+  // ✅ Mobile fix: remove focus to prevent reopenned
   setTimeout(() => {
     document.activeElement?.blur();
   }, 50);
