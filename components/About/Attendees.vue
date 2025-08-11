@@ -84,7 +84,7 @@ import setUpDark from "@/assets/images/img/setUpDark.png";
 import OfferDark from "@/assets/images/img/OfferDark.png";
 import WatchDark from "@/assets/images/img/WatchDark.png";
 import RecieveDark from "@/assets/images/img/RecieveDark.png";
-import mDark from "@/assets/images/img/mDark.png";
+import makeDark from "@/assets/images/img/mDark.png";
 
 const colorMode = useColorMode();
 const isDark = computed(() => colorMode.value === "dark");
@@ -121,7 +121,7 @@ const darkitems = [
     image: RecieveDark,
   },
   {
-    image: mDark,
+    image: makeDark,
   },
 ];
 </script>
