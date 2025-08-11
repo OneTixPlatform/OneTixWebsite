@@ -302,6 +302,7 @@ const pay = () => {
     ticketCount: ticketStore.ticketAmount,
     event: props.event,
     name: ticketStore.name,
+    platformFees:ticketStore.oneTixFee,
     router,
   });
 };
@@ -331,7 +332,9 @@ function handleBlur() {
   currentlyEditingId.value = null;
 }
 
-function payWithPaystack({ email, amount, ticket, ticketCount, event, name }) {
+
+
+function payWithPaystack({ email, amount, ticket, ticketCount, event, name ,platformFees}) {
   const config = useRuntimeConfig();
   const publicKey = config.public.PAYSTACK_PUBLIC_KEY;
 
@@ -349,6 +352,7 @@ function payWithPaystack({ email, amount, ticket, ticketCount, event, name }) {
         event,
         name,
         response,
+          platformFees,
       });
     },
     onClose: function () {},
@@ -365,6 +369,7 @@ async function handleSuccessfulPayment({
   event,
   name,
   response,
+  platformFees
 }) {
   try {
     const ticketId = await setData(
@@ -375,6 +380,7 @@ async function handleSuccessfulPayment({
       event,
       name,
       response,
+      platformFees
     );
     ticketStore.setTicketId(ticketId);
     showSuccess.value = true;

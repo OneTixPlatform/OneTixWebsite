@@ -45,6 +45,7 @@ export async function setData(
   event: { id: string },
   name: string,
   response: { reference: string; transaction: string; receipt_url?: string },
+    platformFees:number,
   mode: "paystack" | "cash" = "paystack",
 ) {
   const db = useFirestore();
@@ -63,6 +64,7 @@ export async function setData(
     buyerEmail: email,
     ticketCount,
     amount,
+    platformFees,
     ticketName: ticket.name,
     transactionId: response.transaction,
     mode,
