@@ -84,9 +84,8 @@ const emit = defineEmits(["close"]);
 const links = [
   { name: "Discover events", path: "/" },
 
-  { name: "Pricing", path: "/how" },
+  { name: "Pricing", path: "/pricing" },
   { name: "About us", path: "/about-us" },
-  { name: "Contact us", path: "/" },
 ];
 
 const colorMode = useColorMode();
