@@ -35,10 +35,9 @@
               About this event
             </p>
             <p
+              v-html="eventData.description"
               class="font-normal text-[16px] text-gray-background-8 dark:text-[#CED4DA]"
-            >
-              {{ eventData?.description }}
-            </p>
+            ></p>
           </div>
           <div class="flex dark:text-[#CED4DA] flex-col gap-[20px]">
             <p>Directions</p>
@@ -72,7 +71,7 @@
             />
             <div
               @click="copy"
-              class="rounded-[8px] bg-[#F1F5F9] px-[12px] py-[8px] max-w-[200px] w-full flex gap-[8px] cursor-pointer items-center "
+              class="rounded-[8px] bg-[#F1F5F9] px-[12px] py-[8px] max-w-[200px] w-full flex gap-[8px] cursor-pointer items-center"
             >
               <IconsLightning />
               <span class="text-[12px] font-medium text-gray-background-7"
