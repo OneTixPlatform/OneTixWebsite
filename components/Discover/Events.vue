@@ -21,10 +21,13 @@
       </div>
     </div>
     <!-- overflowCard -->
-    <div class="overflow-x-auto no-scrollbar mt-[48px] mb-[48px] 2xl:mx-auto 2xl:max-w-[1400px] w-full">
+    <div
+      class="overflow-x-auto no-scrollbar mt-[48px] mb-[48px] 2xl:mx-auto 2xl:max-w-[1400px] w-full"
+    >
+    <p v-if="!isLoading && events.length === 0 " class="font-semibold text-[14px] text-gray-backgound-9">No Published Events Yet</p>
       <div
         v-if="isLoading"
-        class="flex gap-[20px] lg:grid lg:grid-cols-4  lg:gap-[20px] min-w-max lg:min-w-full"
+        class="flex gap-[20px] lg:grid lg:grid-cols-4 lg:gap-[20px] min-w-max lg:min-w-full"
       >
         <!-- loader -->
         <div
@@ -59,7 +62,14 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { collection, query, orderBy, limit, getDocs ,where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+  where,
+} from "firebase/firestore";
 import { useFirestore } from "vuefire";
 
 const db = useFirestore();
@@ -73,7 +83,7 @@ async function fetchEvents() {
     const eventsQuery = query(
       collection(db, "events"),
       limit(8),
-       where("status", "==", "published"),
+      where("status", "==", "published"),
     );
 
     const snapshot = await getDocs(eventsQuery);
@@ -81,14 +91,10 @@ async function fetchEvents() {
       id: doc.id,
       ...doc.data(),
     }));
-
-
-
-
   } catch (error) {
     console.error("Error fetching events:", error);
   } finally {
-    isLoading.value = false; 
+    isLoading.value = false;
   }
 }
 

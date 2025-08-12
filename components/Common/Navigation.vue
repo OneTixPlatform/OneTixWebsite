@@ -103,7 +103,7 @@ onUnmounted(() => {
 
 const links = [
   { name: "Discover events", path: "/" },
-  { name: "Pricing", path: "/" },
+  { name: "Pricing", path: "/pricing" },
   { name: "About us", path: "/about-us" },
 ];
 

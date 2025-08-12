@@ -3,9 +3,9 @@
     class="flex flex-col relative items-center bg-secondary-1 dark:bg-purple-brown overflow-hidden px-4 w-full pt-[32px] pb-[94px]"
   >
     <div class="w-full max-w-[1156px]">
-      <div v-if="eventData.imageUrl" class="h-[380px] w-full rounded-[16px]">
+      <div v-if="eventData?.imageUrl" class="h-[380px] w-full rounded-[16px]">
         <img
-          :src="eventData.imageUrl"
+          :src="eventData?.imageUrl"
           alt="details-image"
           class="object-cover object-center rounded-[16px] w-full h-full"
         />
@@ -13,7 +13,7 @@
       <div
         class="flex flex-col lg:flex-row w-full text-gray-background-8 dark:text-[#CED4DA] font-medium text-[16px] mt-[16px]"
       >
-        <p>{{ formatDate(eventData.eventDate) }}</p>
+        <p>{{ formatDate(eventData?.eventDate) }}</p>
         <!-- <div class="items-center hidden lg:flex gap-2">
           <IconsActivity />
           <p>Activity Fest</p>
@@ -22,7 +22,7 @@
       <p
         class="text-gray-background-8 dark:text-[#CED4DA] font-bold leading-[44px] mt-2 text-[36px]"
       >
-        {{ eventData.title }}
+        {{ eventData?.title }}
       </p>
       <!-- <div
         class="flex items-center dark:text-[#CED4DA] text-gray-background-8 lg:hidden mt-[6px] gap-2"
