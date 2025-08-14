@@ -36,7 +36,7 @@
               :class="[
                 route.path === link.path
                   ? 'text-primary-6 font-medium'
-                  : 'text-gray-background-8 transition-all duration-500 dark:text-white  hover:text-primary-6 ',
+                  : 'text-gray-background-8 transition-all duration-500 dark:text-white cursor-pointer  hover:text-primary-6 ',
               ]"
             >
               {{ link.name }}
@@ -51,11 +51,11 @@
           class="px-[24px] text-gray-background-8 dark:text-white hidden lg:flex py-[8px] font-semibold text-[16px]"
           >Login</span
         > -->
-        <button
+        <!-- <button
           class="bg-primary-5 hidden lg:flex h-[48px] items-center justify-center rounded-[50px] text-white px-[16px] py-[8px]"
         >
           Get started
-        </button>
+        </button> -->
         <IconsHamburger
           @click="emit('showMobileNav')"
           v-if="!isDark"

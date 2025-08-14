@@ -14,11 +14,11 @@
         </span>
         the reason we built it. Everyone else just jumped on the bandwagon
       </h1>
-      <img
+      <!-- <img
         :src="GetStarted"
         alt="get-started"
         class="w-full max-w-[258px] h-auto"
-      />
+      /> -->
     </div>
     <!-- Responsive flower icons -->
     <IconsFlower1
