@@ -45,7 +45,7 @@
           </NuxtLink>
         </li>
       </ul>
-      <div class="mb-[44px] flex flex-col items-center">
+      <!-- <div class="mb-[44px] flex flex-col items-center">
         <p
           class="py-[14px] text-gray-background-8 text-[16px] dark:text-white px-[24px]"
         >
@@ -56,7 +56,7 @@
           label="Get started"
           class="bg-primary-5 text-white w-full !text-[16px] !font-semibold py-[8px] px-[16px] rounded-[50px] !h-[48px]"
         />
-      </div>
+      </div> -->
     </div>
     <div></div>
   </div>
