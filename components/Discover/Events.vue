@@ -24,7 +24,12 @@
     <div
       class="overflow-x-auto no-scrollbar mt-[48px] mb-[48px] 2xl:mx-auto 2xl:max-w-[1400px] w-full"
     >
-    <p v-if="!isLoading && events.length === 0 " class="font-semibold text-[14px] text-gray-backgound-9">No Published Events Yet</p>
+      <p
+        v-if="!isLoading && events.length === 0"
+        class="font-semibold text-[14px] text-gray-backgound-9"
+      >
+        No Published Events Yet
+      </p>
       <div
         v-if="isLoading"
         class="flex gap-[20px] lg:grid lg:grid-cols-4 lg:gap-[20px] min-w-max lg:min-w-full"

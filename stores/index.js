@@ -14,6 +14,7 @@ export const useTicketStore = defineStore("ticket", {
     email: "",
     payStack: null,
     currentUserTicket: "",
+    emailAlreadySent: false,
   }),
 
   actions: {
@@ -29,7 +30,9 @@ export const useTicketStore = defineStore("ticket", {
       this.Total = feeDetails.totalPaid;
       this.currency = feeDetails.currency;
     },
-
+    markEmailSent() {
+      this.emailAlreadySent = true;
+    },
     setTicket(ticket) {
       this.ticket = ticket;
       this.calculateTotal();
