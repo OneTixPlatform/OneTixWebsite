@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col lg:flex-row items-center lg:items-start pt-[48px] pb-[119px] gap-[146px] 2xl:justify-center lg:px-[142px] px-4 bg-[#F8FAFC]"
+    class="w-full flex flex-col-reverse lg:flex-row items-center lg:items-start pt-[48px] pb-[119px] gap-[146px] 2xl:justify-center lg:px-[142px] px-4 bg-[#F8FAFC]"
   >
     <div
       v-if="ticketEvent"
@@ -195,12 +195,16 @@ import { useFirestore } from "vuefire";
 import { formatDate, formatTime } from "@/utils/helpers";
 import html2canvas from "html2canvas";
 
+const { $axios } = useNuxtApp();
 const db = useFirestore();
 const colorMode = useColorMode();
 const ticketStore = useTicketStore();
 const userTicket = ref(null);
 const ticketEvent = ref(null);
 const loading = ref(false);
+const config = useRuntimeConfig();
+const emailApi = config.public.EMAIL_API;
+const toast = useToast();
 
 async function fetchTicketById(ticketId) {
   const ticketDocRef = doc(db, "tickets", ticketId);
@@ -293,6 +297,38 @@ const downloadTicketPdf = async () => {
   }
 };
 
+const sendEmail = async () => {
+  try {
+    let formattedDate;
+
+    if (ticketEvent.value.eventDate?.seconds) {
+      formattedDate = new Date(
+        ticketEvent.value.eventDate.seconds * 1000,
+      ).toISOString();
+    } else {
+      formattedDate = new Date(ticketEvent.value.eventDate).toISOString();
+    }
+
+    const response = await $axios.post(emailApi, {
+      email: userTicket.value.buyerEmail,
+      name: userTicket.value.buyerName,
+      ticketId: userTicket.value.id,
+      eventTitle: ticketEvent.value.title,
+      eventDate: formattedDate,
+      venue: ticketEvent.value.location,
+      ticketType: userTicket.value.ticketName,
+      quantity: userTicket.value.count,
+    });
+    if (response) {
+      toast.success(
+        ` Email sent to ${userTicket.value.buyerEmail} with ticket details for "${ticketEvent.value.title}"`,
+      );
+    }
+  } catch (err) {
+    console.error("📛failed to send email:", err);
+  }
+};
+
 onUnmounted(() => {
   ticketStore.$reset();
 });
@@ -304,7 +340,12 @@ onMounted(async () => {
     useRouter().push("/");
     return;
   }
-  fetchTicketById(ticketId);
+
+  await fetchTicketById(ticketId);
+  if (!ticketStore.emailAlreadySent && ticketStore.currentUserTicket) {
+    await sendEmail();
+    ticketStore.markEmailSent();
+  }
 });
 </script>
 

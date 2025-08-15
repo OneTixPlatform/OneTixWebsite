@@ -342,51 +342,53 @@ function payWithPaystack({
   name,
   platformFees,
 }) {
-  try{
-
-
+  try {
     if (!window.PaystackPop) {
-      toast.error("Unable to load Paystack. Please check your internet and try again.");
-      return
+      toast.error(
+        "Unable to load Paystack. Please check your internet and try again.",
+      );
+      return;
     }
 
-const config = useRuntimeConfig();
-  const publicKey = config.public.PAYSTACK_PUBLIC_KEY;
+    const config = useRuntimeConfig();
+    const publicKey = config.public.PAYSTACK_PUBLIC_KEY;
 
+    let paymentCompleted = false;
 
-      let paymentCompleted = false;
-
-  const handler = window.PaystackPop.setup({
-    key: publicKey,
-    email,
-    amount: amount * 100,
-    currency: "NGN",
-    callback: function (response) {
+    const handler = window.PaystackPop.setup({
+      key: publicKey,
+      email,
+      amount: amount * 100,
+      currency: "NGN",
+      callback: function (response) {
         paymentCompleted = true;
-      handleSuccessfulPayment({
-        email,
-        amount,
-        ticket,
-        ticketCount,
-        event,
-        name,
-        response,
-        platformFees,
-      });
-    },
-    onClose: function () {
-      if (!paymentCompleted) {
-          toast.message("You closed Paystack without completing your transaction.")
+        handleSuccessfulPayment({
+          email,
+          amount,
+          ticket,
+          ticketCount,
+          event,
+          name,
+          response,
+          platformFees,
+        });
+      },
+      onClose: function () {
+        if (!paymentCompleted) {
+          toast.message(
+            "You closed Paystack without completing your transaction.",
+          );
         }
-    },
-  });
+      },
+    });
 
-  handler.openIframe();
-  }catch (err) {
+    handler.openIframe();
+  } catch (err) {
     console.error("❌ Paystack error:", err);
-    toast.error("Something went wrong while starting your payment. Please try again.",);
+    toast.error(
+      "Something went wrong while starting your payment. Please try again.",
+    );
   }
-  
 }
 
 async function handleSuccessfulPayment({
@@ -413,7 +415,9 @@ async function handleSuccessfulPayment({
     ticketStore.setTicketId(ticketId);
     showSuccess.value = true;
   } catch (error) {
-    toast.error("Payment was successful but we could not save your ticket. Please contact support.");
+    toast.error(
+      "Payment was successful but we could not save your ticket. Please contact support.",
+    );
   }
 }
 const steps = [

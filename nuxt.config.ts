@@ -62,6 +62,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       PAYSTACK_PUBLIC_KEY: process.env.NUXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+      EMAIL_API: process.env.NUXT_PUBLIC_EMAIL_API,
     },
   },
   qrcode: {
