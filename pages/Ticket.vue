@@ -194,6 +194,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useFirestore } from "vuefire";
 import { formatDate, formatTime } from "@/utils/helpers";
 import html2canvas from "html2canvas";
+import dayjs from "dayjs";
 
 const { $axios } = useNuxtApp();
 const db = useFirestore();
@@ -302,12 +303,26 @@ const sendEmail = async () => {
     let formattedDate;
 
     if (ticketEvent.value.eventDate?.seconds) {
+      const date = new Date(
+        ticketEvent.value.eventDate.seconds * 1000 +
+          (ticketEvent.value.eventDate.nanoseconds || 0) / 1e6,
+      );
+
       formattedDate = new Date(
-        ticketEvent.value.eventDate.seconds * 1000,
-      ).toISOString();
+        date.getTime() - date.getTimezoneOffset() * 60000,
+      )
+        .toISOString()
+        .slice(0, 19);
     } else {
-      formattedDate = new Date(ticketEvent.value.eventDate).toISOString();
+      const date = new Date(ticketEvent.value.eventDate);
+      formattedDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000,
+      )
+        .toISOString()
+        .slice(0, 19);
     }
+
+    console.log(formattedDate);
 
     const response = await $axios.post(emailApi, {
       email: userTicket.value.buyerEmail,

@@ -3,8 +3,7 @@
     style="clip-path: polygon(100% 0, 100% 96%, 65% 99%, 31% 94%, 0 100%, 0 0)"
     class="lg:py-[86px] z-20 bg-white relative dark:bg-black-highest flex flex-col items-center lg:items-start 2xl:items-center px-4 py-8 lg:px-[82px]"
   >
-    <div class="relative"   id="about-us">
-      
+    <div class="relative" id="about-us">
       <IconsTicket
         v-if="!isDark"
         class="absolute hidden xl:flex top-[47px] left-[900px]"
@@ -32,7 +31,6 @@
       </div>
     </div>
     <div
-   
       class="w-full max-w-[1320px] 2xl:mx-auto mb-[97px] flex flex-col items-center lg:items-start lg:flex-row gap-[44px] mt-[117px]"
     >
       <div class="h-[324px] relative w-full max-w-[626px]">
@@ -46,7 +44,6 @@
         />
       </div>
       <div
-     
         class="flex flex-col max-w-[602px] w-full items-center lg:items-start gap-[24px] mt-[33px]"
       >
         <h1

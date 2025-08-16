@@ -8,9 +8,8 @@
 </template>
 
 <script setup lang="ts">
-
 useHead({
-title:'About Us'
+  title: "About Us",
 });
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <NuxtLink :to="`/events/${eventData.id}`">
-    <div class="h-[313px] relative w-[304px]  cursor-pointer">
+    <div class="h-[313px] relative w-[304px] cursor-pointer">
       <div
         class="h-[147px] relative w-full overflow-hidden group rounded-[16px]"
       >

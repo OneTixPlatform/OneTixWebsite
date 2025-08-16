@@ -94,7 +94,7 @@ export async function setData(
 
   try {
     await batch.commit();
-    console.log("✅ Firebase batch committed successfully.");
+    // console.log("✅ Firebase batch committed successfully.");
     return ticketRef.id;
   } catch (error) {
     console.error("❌ Error committing batch:", error);

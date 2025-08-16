@@ -8,7 +8,7 @@
         <CommonInput
           v-model="form.firstName"
           class="w-full"
-          placeHolder="Enter first Name"
+          placeHolder="Enter First Name"
           :errorMessage="v$.firstName.$errors"
         />
       </div>
@@ -29,7 +29,7 @@
         </label>
         <CommonInput
           class="w-full"
-          placeHolder="Enter email"
+          placeHolder="Enter Email"
           v-model="form.email"
           :errorMessage="v$.email.$errors"
         />
@@ -65,10 +65,13 @@
           >
             <div
               v-if="usePaystack"
-              class="h-[7.5px] w-[7.5px] bg-[#E61636] rounded-full"
+              class="h-[7.5px] w-[7.5px] cursor-pointer bg-[#E61636] rounded-full"
             ></div>
           </div>
-          <p class="text-gray-background-7 font-medium text-[16px]">
+          <p
+            @click="togglePaystack"
+            class="text-gray-background-7 cursor-pointer font-medium text-[16px]"
+          >
             Use Paystack
           </p>
         </div>
@@ -128,22 +131,18 @@ const rules = computed(() => ({
 
 const v$ = useVuelidate(rules, form, { $autoDirty: true });
 defineExpose({ v$ });
-watch(
-  () => [form.firstName, form.lastName],
-  ([first, last]) => {
-    form.name = `${first} ${last}`.trim();
-  },
-);
 
 watch(
-  () => ({
-    first: form.firstName,
-    last: form.lastName,
-    email: form.email,
-  }),
-  ({ first, last, email }) => {
-    if (first && last && email) {
-      ticketStore.setUserDetails(`${first} ${last}`.trim(), email, first, last);
+  () => [form.firstName, form.lastName, form.email],
+  ([first, last, email]) => {
+    const cleanFirst = first.replace(/\s+/g, " ").trim();
+    const cleanLast = last.replace(/\s+/g, " ").trim();
+    form.firstName = cleanFirst;
+    form.lastName = cleanLast;
+    form.name = `${cleanFirst} ${cleanLast}`.trim();
+
+    if (cleanFirst && cleanLast && email) {
+      ticketStore.setUserDetails(form.name, email, cleanFirst, cleanLast);
     }
   },
   { deep: true },
