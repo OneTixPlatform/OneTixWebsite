@@ -79,17 +79,31 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { formatCurrency } from "@/utils/helpers";
 
 const ticketStore = useTicketStore();
-const selectedAmount = ref(0);
 
 const props = defineProps(["ticket", "isEditing", "currentlyEditingId"]);
 const emit = defineEmits(["focus", "blur"]);
 
 const isDisabled = computed(() => {
   return props.isEditing && props.currentlyEditingId !== props.ticket.id;
+});
+
+const selectedAmount = computed({
+  get: () =>
+    ticketStore.ticket?.id === props.ticket.id ? ticketStore.ticketAmount : 0,
+  set: (amount) => {
+    if (amount > 0) {
+      ticketStore.setTicket(props.ticket);
+      ticketStore.setTicketAmount(amount);
+      emit("focus", props.ticket.id);
+    } else {
+      ticketStore.resetStore();
+      emit("blur");
+    }
+  },
 });
 
 const dropdownItemsSimple = computed(() => {
@@ -99,19 +113,6 @@ const dropdownItemsSimple = computed(() => {
     value: i,
   }));
 });
-
-function handleAmountChange(amount) {
-  selectedAmount.value = amount;
-
-  if (amount > 0) {
-    ticketStore.setTicket(props.ticket);
-    ticketStore.setTicketAmount(amount);
-    emit("focus", props.ticket.id);
-  } else {
-    ticketStore.resetStore();
-    emit("blur");
-  }
-}
 </script>
 
 <style scoped></style>

@@ -8,10 +8,8 @@
 
 <script setup lang="ts">
 useHead({
-title:'Discover Events'
+  title: "Discover Events",
 });
-
-
 </script>
 
 <style scoped></style>

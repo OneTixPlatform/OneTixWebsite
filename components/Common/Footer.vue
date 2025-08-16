@@ -20,20 +20,19 @@
     </div>
     <div class="flex gap-[29px] text-white mt-8 items-center justify-center">
       <NuxtLink :to="'https://linktr.ee/playballafrica'">
-     <button
-        class="border-[1px] cursor-pointer focus:outline-none border-white py-[6px] px-[12px] text-center rounded-[16px]"
-      >
-        Contact us
-      </button>
+        <button
+          class="border-[1px] cursor-pointer focus:outline-none border-white py-[6px] px-[12px] text-center rounded-[16px]"
+        >
+          Contact us
+        </button>
       </NuxtLink>
- <NuxtLink :to="'about-us#about-us'">
- <button
-        class="border-[1px] ] cursor-pointer focus:outline-none border-white py-[6px] px-[12px] text-center rounded-[16px]"
-      >
-        About us
-      </button>
- </NuxtLink>
-     
+      <NuxtLink :to="'about-us#about-us'">
+        <button
+          class="border-[1px] ] cursor-pointer focus:outline-none border-white py-[6px] px-[12px] text-center rounded-[16px]"
+        >
+          About us
+        </button>
+      </NuxtLink>
     </div>
 
     <div
@@ -55,13 +54,11 @@
       </div>
 
       <div class="flex items-center gap-[16px]">
-
         <CommonFooterLogo
           v-for="(icon, index) in footerIcons"
           :key="index"
           :icon="icon.icon"
           :link="icon.link"
-         
         />
       </div>
     </div>
@@ -75,9 +72,17 @@ import IconsInstagram from "@/components/icons/Instagram.vue";
 import IconsTwitter from "~/components/icons/Twitter.vue";
 
 const footerIcons = [
-  { name: "Instagram", icon: IconsInstagram,link:'https://www.instagram.com/playballafrica/?igshid=MzRlODBiNWFlZA%3D%3D' },
-  { name: "Whatsapp", icon: IconsWhatsapp,link:'https://wa.link/5jtg55'}, 
-  { name: "Twitter", icon: IconsTwitter,link:'https://twitter.com/playballafrica?s=21&t=eFVl3LBhxYW7ARvGCbrHKQ'  },
+  {
+    name: "Instagram",
+    icon: IconsInstagram,
+    link: "https://www.instagram.com/playballafrica/?igshid=MzRlODBiNWFlZA%3D%3D",
+  },
+  { name: "Whatsapp", icon: IconsWhatsapp, link: "https://wa.link/5jtg55" },
+  {
+    name: "Twitter",
+    icon: IconsTwitter,
+    link: "https://twitter.com/playballafrica?s=21&t=eFVl3LBhxYW7ARvGCbrHKQ",
+  },
 ];
 </script>
 

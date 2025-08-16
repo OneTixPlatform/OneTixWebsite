@@ -10,7 +10,7 @@
           <div
             @click="previousStep"
             v-if="!showSuccess"
-            class="flex items-center cusor.pointer border border-[#E2E8F0] justify-center h-[36px] w-[36px] rounded-full"
+            class="flex items-center cursor-pointer border border-[#E2E8F0] justify-center h-[36px] w-[36px] rounded-full"
           >
             <IconsArrowLeft />
           </div>
@@ -26,13 +26,13 @@
           >
             <IconsClose />
           </div>
-          <div
+          <!-- <div
             v-if="showSuccess"
             @click="emit('close')"
             class="flex cursor-pointer items-center border border-[#E2E8F0] justify-center h-[36px] w-[36px] rounded-full"
           >
             <IconsClose />
-          </div>
+          </div> -->
         </div>
       </div>
       <div v-if="showSuccess" @close="emit('close')" class="flex-grow h-full">

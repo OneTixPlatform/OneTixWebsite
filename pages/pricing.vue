@@ -9,9 +9,8 @@
 
 <script setup>
 useHead({
-title:'Pricing'
+  title: "Pricing",
 });
-
 </script>
 
 <style lang="scss" scoped></style>
