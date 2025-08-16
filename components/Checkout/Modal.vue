@@ -59,7 +59,7 @@
             <div
               v-for="(s, index) in steps"
               :key="index"
-              class="flex items-center gap-[8px]"
+              class="flex items-center justify-start gap-[2px] sm:gap-[8px]"
             >
               <div
                 :class="[
@@ -119,7 +119,7 @@
                     <div
                       class="h-[8px] w-[8px] rounded-full bg-[#64748B]"
                     ></div>
-                    <span class="text-[14px] leading-[18px]">
+                    <span class="sm:text-[14px] text-[12px] whitespace-nowrap  leading-[18px]">
                       {{ formatTime(event.eventDate) }}
                     </span>
                   </div>

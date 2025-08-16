@@ -63,7 +63,7 @@
       class="bg-white shadow-[0px_4px_10px_#00000014] relative lg:h-[715px] border border-[#E2E8F0] py-[14px] rounded-[24px] px-[12px] max-w-[470px] w-full"
     >
       <div
-        class="absolute bottom-4 flex flex-col gap-[4px] items-center right-4"
+        class="absolute bottom-[5px] sm:bottom-4 flex flex-col gap-[4px] mt-2 sm:mt-0 items-center right-4"
       >
         <p class="sm:text-[11px] text-[8px] text-[#475569]">Powered by</p>
         <div class="sm:h-[27px] h-[20px] w-[60px] sm:w-[80px]">
@@ -106,7 +106,7 @@
         <IconsDottedLine />
       </div>
 
-      <div class="mt-[48px] flex gap-4 pl-[30px] pr-[23px]">
+      <div class="mt-[48px] flex gap-4  pl-[5px]  sm:pl-[30px] pr-[23px]">
         <Qrcode
           :value="ticketStore.currentUserTicket"
           variant="pixelated"
@@ -116,14 +116,14 @@
           :background="qrColors.background"
         />
         <div class="flex flex-col gap-[6px]">
-          <p class="text-secondary-5 font-semibold text-[18px]">
+          <p class="text-secondary-5 font-semibold sm:text-[18px] text-[14px]">
             {{ userTicket.ticketName }}
           </p>
-          <p class="text-secondary-5 font-semibold text-[18px]">
+          <p class="text-secondary-5 font-semibold sm:text-[18px] text-[14px]">
             {{ userTicket.count }} ticket(s)
           </p>
           <!-- <p class="text-[15px] font-bold text-gray-background-8">₦200,000.00</p> -->
-          <p class="text-[14px] text-gray-background-8">
+          <p class="sm:text-[14px] text-[12px] text-gray-background-8">
             {{ userTicket.buyerName }}
           </p>
         </div>

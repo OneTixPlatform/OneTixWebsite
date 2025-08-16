@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-2">
     <div
-      class="h-[40px] border border-[#E2E8F0] rounded-[8px] px-[12px] py-[8px]"
+      class="h-[40px] border border-[#E2E8F0] focus-within:border-primary-5  rounded-[8px] px-[12px] py-[8px]"
     >
       <input
         :type="inputType"
